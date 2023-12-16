@@ -3,11 +3,7 @@ import { Icon } from "astro-icon";
 import ThemeSwitcher from "~/components/theme-switcher.astro";
 import type { NavItem } from "~/types";
 
-const navItems: Array<NavItem> = [
-  { title: "Contacto", url: "#features" },
-  { title: "Descarga", url: "#compatibility" },
-  // { title: "Showcase", url: "#showcase" },
-];
+const navItems: Array<NavItem> = [{ title: "Descarga", url: "#" }];
 ---
 
 <header
@@ -17,11 +13,10 @@ const navItems: Array<NavItem> = [
   <a class="flex items-center gap-3 hover:!text-default" href="#">
     <h1 class="sr-only">Astro</h1>
     <Icon name="CyptoArbitrageNotifierIcon" class="h-10" />
-    <Icon name="wordmark" class="hidden h-4 sm:block" />
   </a>
   <div>
     <div class="flex items-center gap-6">
-      <nav class="hidden sm:block">        
+      <nav class="hidden sm:block">
         <ul class="flex items-center gap-6">
           {
             navItems.map(({ title, url }) => (
@@ -31,10 +26,16 @@ const navItems: Array<NavItem> = [
                 </a>
               </li>
             ))
-          }          
+          }
         </ul>
       </nav>
-      <a href="https://www.buymeacoffee.com/cristianpereyradev" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+      <a href="https://www.buymeacoffee.com/cristianpereyradev" target="_blank"
+        ><img
+          src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+          alt="Buy Me A Coffee"
+          style="height: 60px !important;width: 217px !important;"
+        /></a
+      >
       <button
         id="open-nav-button"
         type="button"

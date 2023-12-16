@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon";
-import astronautImage from "~/assets/transparent_mobile_mockup.png";
+import appPresentation from "~/assets/presentación.gif";
 import HeroImage from "~/components/hero-image.astro";
 import Starfield from "~/components/starfield.astro";
 import GitHubCorner from "./github-corner.astro";
@@ -20,7 +20,7 @@ const sizes = "(min-width: 640px) 42vw, 67vw";
     <h2
       class="flex flex-col gap-2 self-end sm:gap-4 sm:self-auto sm:justify-self-end"
     >
-      <!-- <Icon name="CyptoArbitrageNotifierIcon" class="h-24 text-white md:h-32" /> -->
+      <Icon name="CyptoArbitrageNotifierIcon" class="h-24 text-white md:h-32" />
       <div
         class="gradient-text text-center font-extrabold tracking-tighter text-6xl"
       >
@@ -29,16 +29,18 @@ const sizes = "(min-width: 640px) 42vw, 67vw";
     </h2>
     <div
       id="astronaut"
-      class="w-2/3 max-w-3xl self-start sm:w-5/12 sm:self-auto sm:justify-self-center"
+      class="flex h-full w-full max-w-3xl self-start sm:w-4/12 sm:self-auto sm:justify-self-center"
     >
-      <Image
+      <!-- <Image
         class="h-full w-full object-cover"
-        src={astronautImage}
+        src={appPresentation}
         widths={widths}
         sizes={sizes}
         loading="eager"
         alt="A floating astronaut in a space suit"
-      />
+      /> -->
+      <video src="/videos/presentación.mp4" width="auto" height="100%" autoplay
+      ></video>
     </div>
   </div>
 </section>
@@ -50,33 +52,3 @@ const sizes = "(min-width: 640px) 42vw, 67vw";
     }
   </style>
 </noscript>
-
-<style>
-  @keyframes float {
-    0% {
-      transform: translate3d(0, 0, 0);
-    }
-
-    100% {
-      transform: translate3d(0, 30px, 0);
-    }
-  }
-
-  #astronaut {
-    /*animation: float linear 2.5s infinite alternate;*/
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    #astronaut {
-      @apply animate-none;
-    }
-
-    :global(#starfield) {
-      @apply hidden;
-    }
-
-    #splash-bg-fallback {
-      @apply block;
-    }
-  }
-</style>
