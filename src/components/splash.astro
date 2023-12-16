@@ -5,10 +5,7 @@ import { Icon } from "astro-icon";
 import HeroImage from "~/components/hero-image.astro";
 import Starfield from "~/components/starfield.astro";
 
-import appPresentation from "~/assets/presentación.gif";
-
-const widths = [450, 800];
-const sizes = "(min-width: 640px) 42vw, 67vw";
+import appScreenshot from "~/assets/app_screenshot.png";
 ---
 
 <section class="relative h-full bg-black">
@@ -31,15 +28,15 @@ const sizes = "(min-width: 640px) 42vw, 67vw";
       id="video-presentation"
       class="flex h-full w-full max-w-3xl self-start sm:w-4/12 sm:self-auto sm:justify-self-center"
     >
-      <!-- <Image
-        class="h-full w-full object-cover"
-        src={appPresentation}
-        widths={widths}
-        sizes={sizes}
-        loading="eager"
-        alt="A floating astronaut in a space suit"
-      /> -->
-      <video width="auto" height="100%" autoplay muted>
+      <video
+        width="auto"
+        height="100%"
+        autoplay
+        muted
+        playsinline
+        loop
+        poster={appScreenshot.src}
+      >
         <source src="/videos/presentación.mp4" type="video/mp4" />
       </video>
     </div>
