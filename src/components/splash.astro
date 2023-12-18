@@ -7,14 +7,14 @@ import Starfield from "~/components/starfield.astro";
 import appScreenshot from "~/assets/app_screenshot.png";
 ---
 
-<section class="relative h-full bg-black">
+<section class="relative h-full overflow-hidden bg-black">
   <Starfield />
   <div id="splash-bg-fallback" class="absolute inset-0 hidden opacity-40">
     <HeroImage />
   </div>
   <div class="relative grid h-full place-items-center lg:grid-cols-2">
     <h2
-      class="hidden items-center gap-2 self-center px-4 sm:gap-4 md:flex md:flex-col"
+      class="hidden items-center gap-2 self-center px-4 sm:gap-4 md:flex-col lg:flex"
     >
       <Icon
         name="cryptoarbitrage-logo"
@@ -28,11 +28,11 @@ import appScreenshot from "~/assets/app_screenshot.png";
     </h2>
     <div
       id="video-presentation"
-      class="grid w-full max-w-3xl px-4 sm:w-6/12 sm:self-auto sm:justify-self-center"
+      class="grid h-full h-screen w-full items-center justify-center overflow-hidden px-4 sm:self-auto sm:justify-self-center"
     >
       <video
+        style="height: 96vh;"
         width="auto"
-        height="100%"
         autoplay
         muted
         playsinline
