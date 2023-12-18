@@ -5,6 +5,7 @@ import HeroImage from "~/components/hero-image.astro";
 import Starfield from "~/components/starfield.astro";
 
 import appScreenshot from "~/assets/app_screenshot.png";
+import AppDescriptionText from "./app-description-text.astro";
 ---
 
 <section class="relative h-full overflow-hidden bg-black">
@@ -16,16 +17,9 @@ import appScreenshot from "~/assets/app_screenshot.png";
     <h2
       class="hidden items-center gap-2 self-center px-4 sm:gap-4 md:flex-col lg:flex"
     >
-      <Icon
-        name="cryptoarbitrage-logo"
-        class="hidden text-white md:block md:h-20 lg:h-24"
-      />
-      <p
-        class="gradient-text text-center font-extrabold tracking-tighter text-4xl lg:text-6xl"
-      >
-        Notificaciones de arbitrages crypto para Android
-      </p>
+      <AppDescriptionText />
     </h2>
+
     <div
       id="video-presentation"
       class="grid h-full h-screen w-full items-center justify-center overflow-hidden px-4 sm:self-auto sm:justify-self-center"
