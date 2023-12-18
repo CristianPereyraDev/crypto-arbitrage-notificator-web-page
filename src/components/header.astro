@@ -3,126 +3,48 @@ import { Icon } from "astro-icon";
 import ThemeSwitcher from "~/components/theme-switcher.astro";
 import type { NavItem } from "~/types";
 
-const navItems: Array<NavItem> = [{ title: "Descarga", url: "#" }];
+const navItems: Array<NavItem> = [
+  {
+    title: "Descarga",
+    url: "https://drive.google.com/file/d/12Xz4EgnNKDG3Rj6s15awxXnOyCMRoTE-/view?usp=sharing",
+  },
+];
 ---
 
 <header
   id="page-header"
-  class="absolute bottom-0 z-20 flex w-1/2 items-center justify-between border-b border-transparent px-8 py-4 text-white"
+  class="flex w-full flex-col items-center justify-between gap-12 border-b border-transparent px-8 py-4 text-white lg:absolute lg:bottom-0 lg:top-auto lg:z-20 lg:w-2/4 lg:flex-row lg:bg-transparent"
 >
+  <div class="flex flex-col items-center gap-6 lg:flex-row">
+    <nav class="block">
+      <ul class="flex flex-col items-center gap-6">
+        {
+          navItems.map(({ title, url }) => (
+            <li>
+              <a class="font-semibold text-xl" href={url} target="_blank">
+                {title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <a href="https://www.buymeacoffee.com/cristianpereyradev" target="_blank"
+      ><img
+        src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+        alt="Buy Me A Coffee"
+        style="height: 60px !important;width: 217px !important;"
+      /></a
+    >
+  </div>
   <a
     class="flex items-center gap-3 hover:!text-default"
     href="https://cristianpereyradev.github.io/"
   >
     <h1 class="sr-only">Cristian Pereyra, Full Stack Developer</h1>
-    <Icon name="cristian-pereyra-dev-logo" class="h-10" />
+    <Icon name="cristian-pereyra-dev-logo" class="h-12" />
   </a>
-  <div>
-    <div class="flex items-center gap-6">
-      <nav class="hidden sm:block">
-        <ul class="flex items-center gap-6">
-          {
-            navItems.map(({ title, url }) => (
-              <li>
-                <a class="text-sm" href={url}>
-                  {title}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-      <a href="https://www.buymeacoffee.com/cristianpereyradev" target="_blank"
-        ><img
-          src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-          alt="Buy Me A Coffee"
-          style="height: 60px !important;width: 217px !important;"
-        /></a
-      >
-      <button
-        id="open-nav-button"
-        type="button"
-        class="btn sm:hidden"
-        aria-label="Navigation"
-      >
-        <Icon pack="mdi" name="menu" class="h-8" />
-      </button>
-      <ThemeSwitcher />
-    </div>
-    <div id="menu-modal" class="modal hidden" aria-hidden="true">
-      <div class="fixed inset-0 bg-default px-8 py-4 text-default">
-        <div class="space-y-4" role="dialog" aria-modal="true">
-          <header class="text-right">
-            <button
-              id="close-nav-button"
-              type="button"
-              class="btn"
-              aria-label="Close navigation"
-            >
-              <Icon pack="mdi" name="close" class="h-8" />
-            </button>
-          </header>
-          <div class="flex justify-center">
-            <Icon name="cryptoarbitrage-logo" class="h-16" />
-          </div>
-          <nav>
-            <ul class="flex flex-col">
-              {
-                navItems.map(({ title, url }) => (
-                  <li>
-                    <a class="block py-4 text-center text-xl" href={url}>
-                      {title}
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </div>
 </header>
-
-<script>
-  import MicroModal from "micromodal";
-  import invariant from "tiny-invariant";
-
-  const menuModalId = "menu-modal";
-
-  const header = document.querySelector("#page-header") as HTMLElement;
-  const page = document.documentElement;
-  const menu = document.querySelector(`#${menuModalId} ul`);
-  const openNavButton = document.querySelector("#open-nav-button");
-  const closeNavButton = document.querySelector("#close-nav-button");
-
-  invariant(header, "header should not be null");
-  invariant(menu, "menu should not be null");
-  invariant(openNavButton, "openNavButton should not be null");
-  invariant(closeNavButton, "closeNavButton should not be null");
-
-  const openMenu = () => {
-    MicroModal.show(menuModalId, { disableScroll: true });
-  };
-
-  const closeMenu = () => {
-    MicroModal.close(menuModalId);
-  };
-
-  openNavButton.addEventListener("click", openMenu);
-  closeNavButton.addEventListener("click", closeMenu);
-
-  document.addEventListener("scroll", () => {
-    const d = page.clientHeight - page.scrollTop - header.offsetHeight;
-    header.classList.toggle("fixed-header", d < 0);
-  });
-
-  menu.addEventListener("click", (event) => {
-    if ((event.target as HTMLElement).tagName === "A") {
-      closeMenu();
-    }
-  });
-</script>
 
 <noscript>
   <style>
