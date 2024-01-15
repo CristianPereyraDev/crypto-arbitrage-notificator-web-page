@@ -1,0 +1,30 @@
+.symbol-table-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  color: aqua;
+  font-size: 1rem;
+}
+
+.symbol-table-row:nth-child(3n-1) {
+  background-color: rgb(161, 161, 161);
+}
+
+.symbol-table-row:nth-child(3n-2) {
+  background-color: rgb(109, 109, 109);
+}
+
+.symbol-table-row:nth-child(3n-3) {
+  background-color: rgb(63, 63, 63);
+}
+
+.symbol-table-row > span {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.3rem;
+  border-left-width: 1px;
+}
+
+.symbol-table-row span:first-child {
+  border-left: none;
+}

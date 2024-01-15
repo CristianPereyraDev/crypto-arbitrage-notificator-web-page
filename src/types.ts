@@ -20,3 +20,8 @@ export interface NavItem {
   title: string;
   url: string;
 }
+
+export interface ICryptoPair {
+  crypto: string;
+  fiat: string;
+}
