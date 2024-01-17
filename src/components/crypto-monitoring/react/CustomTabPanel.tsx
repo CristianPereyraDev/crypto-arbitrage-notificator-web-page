@@ -1,5 +1,4 @@
 import React from "react";
-import Box from "@mui/material/Box";
 
 type CustomTabPanelProps = {
   index: number;
@@ -18,8 +17,9 @@ export default function CustomTabPanel(
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...other}
+      className="mt-2 overscroll-contain"
     >
-      <Box sx={{ p: 3 }}>{children}</Box>
+      {children}
     </div>
   );
 }

@@ -1,10 +1,47 @@
 ---
-import "@fontsource-variable/inter";
-import RootLayout from "~/layouts/RootLayout.astro";
-import Splash from "~/components/splash.astro";
-import "~/styles/index.css";
+import PriceMonitoringLayout from "../layouts/PriceMonitoringLayout.astro";
+import SymbolTabs from "../components/crypto-monitoring/react/SymbolTabs";
+
+let availablePairs: { crypto: string; fiat: string }[] = [];
+
+try {
+  const response = await fetch("http://localhost:3000/api/pairs_available");
+
+  if (response.ok) {
+    const data: string[] = (await response.json()).data;
+
+    availablePairs = data.map((symbol) => {
+      return { crypto: symbol.split("-")[0], fiat: symbol.split("-")[1] };
+    });
+  }
+} catch (error) {
+  console.log("Error on index.astro: %s", error);
+}
 ---
 
-<RootLayout>
-  <Splash />
-</RootLayout>
+<PriceMonitoringLayout>
+  <div id="symbols-container">
+    <SymbolTabs client:load pairs={availablePairs} />
+  </div>
+
+  <!-- Websocket setup -->
+  <div hx-ext="ws" ws-connect="ws://localhost:3000/websocket/web">
+    {
+      availablePairs.map((pair) => (
+        <div
+          class="on-load-message"
+          ws-send
+          hx-trigger="load"
+          hx-vals={`{"crypto": { "asset": "${pair.crypto}", "fiat": "${pair.fiat}" }}`}
+        />
+      ))
+    }
+    <div
+      class="on-load-message"
+      ws-send
+      hx-trigger="load"
+      hx-vals={`{"currency": { "base": "USD", "quote": "ARS" }}`}
+    >
+    </div>
+  </div>
+</PriceMonitoringLayout>

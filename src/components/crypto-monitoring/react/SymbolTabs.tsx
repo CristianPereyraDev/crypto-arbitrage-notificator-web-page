@@ -20,8 +20,8 @@ export default function SymbolTabs(props: SymbolTabsProps) {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+    <div className="px-4">
+      <div className="sticky top-0 rounded-b-md bg-zinc-800">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -37,12 +37,12 @@ export default function SymbolTabs(props: SymbolTabsProps) {
             />
           ))}
         </Tabs>
-      </Box>
+      </div>
       {pairs.map((pair, index) => (
         <CustomTabPanel key={index} index={index} value={value}>
           <SymbolMonitor crypto={pair.crypto} fiat={pair.fiat} />
         </CustomTabPanel>
       ))}
-    </Box>
+    </div>
   );
 }

@@ -1,0 +1,34 @@
+---
+
+---
+
+<style is:global>
+  ul.currency-pair-rates {
+    display: flex;
+    gap: 1rem;
+  }
+
+  ul.currency-pair-rates > li {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: center;
+    font-size: 0.8rem;
+  }
+
+  ul.currency-pair-rates > li > span:nth-child(1) {
+    grid-column: 1/3;
+  }
+
+  ul.currency-pair-rates > li > span:nth-child(n + 2) {
+    grid-row: 2;
+    color: aqua;
+  }
+</style>
+
+<div
+  id="USD-ARS-container"
+  class="currency-pair-rates-container"
+  data-currency-base="USD"
+  data-currency-quote="ARS"
+>
+</div>

@@ -1,20 +1,43 @@
+#price-monitoring-app {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+}
+
+#price-monitoring-app > header {
+  grid-area: header;
+}
+
+#price-monitoring-app > main {
+  grid-area: main;
+}
+
+#price-monitoring-app > footer {
+  grid-area: footer;
+}
+
 .symbol-table-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  color: aqua;
-  font-size: 1rem;
+  color: rgb(255, 255, 255);
+  font-size: 0.8rem;
 }
 
-.symbol-table-row:nth-child(3n-1) {
-  background-color: rgb(161, 161, 161);
+.symbol-table-row:first-child {
+  color: rgb(65, 255, 65);
 }
 
-.symbol-table-row:nth-child(3n-2) {
-  background-color: rgb(109, 109, 109);
+.symbol-table-row:nth-child(2n-1) {
+  background-color: rgb(22, 22, 22);
 }
 
-.symbol-table-row:nth-child(3n-3) {
-  background-color: rgb(63, 63, 63);
+.symbol-table-row:nth-child(2n-2) {
+  background-color: rgb(29, 29, 29);
 }
 
 .symbol-table-row > span {
@@ -22,9 +45,12 @@
   gap: 0.5rem;
   align-items: center;
   padding: 0.3rem;
-  border-left-width: 1px;
 }
 
 .symbol-table-row span:first-child {
   border-left: none;
+}
+
+.symbol-table-row span > img {
+  max-height: 1.3rem;
 }

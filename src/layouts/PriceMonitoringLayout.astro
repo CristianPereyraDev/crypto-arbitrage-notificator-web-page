@@ -3,6 +3,7 @@ import "../styles/index.css";
 
 import "@fontsource-variable/inter";
 import Footer from "../components/footer.astro";
+import DollarRates from "~/components/crypto-monitoring/dollar-rates.astro";
 
 const { generator, site } = Astro;
 const image = new URL("social.png", site);
@@ -33,22 +34,18 @@ const description = "Consulta precios crypto.";
       integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
       crossorigin="anonymous"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
-
-    <style>
-      .row-exchange {
-        color: aqua;
-      }
-    </style>
   </head>
-  <body
-    class="h-full overflow-x-hidden bg-default text-default text-base selection:bg-secondary selection:text-white"
-  >
-    <header></header>
-    <main class="h-full">
-      <slot />
-    </main>
-    <footer class="relative flex h-32 flex-col items-center justify-center">
-      <Footer />
-    </footer>
+  <body class="h-full overflow-x-hidden bg-zinc-950">
+    <div id="price-monitoring-app">
+      <header class="px-4 py-2">
+        <DollarRates />
+      </header>
+      <main class="h-full">
+        <slot />
+      </main>
+      <footer class="h-16">
+        <Footer />
+      </footer>
+    </div>
   </body>
 </html>
