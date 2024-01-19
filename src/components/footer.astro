@@ -1,9 +1,19 @@
 ---
 import { Icon } from "astro-icon";
 import type { FooterLink } from "~/types";
-import AppDescriptionText from "./app-description-text.astro";
+
+interface Props {
+  navLinks: Array<FooterLink>;
+}
+
+const { navLinks = [] } = Astro.props;
 
 const links: Array<FooterLink> = [
+  {
+    url: "https://cristianpereyradev.github.io/",
+    description: "Cristian Pereyra, Full Stack Developer",
+    icon: "cristian-pereyra-dev-logo",
+  },
   {
     url: "mailto:cristian.pereyra.dev@gmail.com",
     description: "Mi perfil de Linkedin",
@@ -23,27 +33,24 @@ const links: Array<FooterLink> = [
 ---
 
 <div class="grid h-full grid-cols-2 items-center border-t px-2 py-2">
-  <ul class="flex h-full">
-    <li>
-      <a
-        href="/native-app"
-        target="_blank"
-        class="flex h-full items-center justify-center"
-      >
-        <span>CryptoARbitrage</span>
-        <Icon class="h-full" name="mdi:adb" />
-      </a>
-    </li>
+  <ul class="flex h-full gap-4">
+    {
+      navLinks.map((link) => (
+        <li>
+          <a class="flex h-full items-center" href={link.url} target="_blank">
+            <span class="">{link.description}</span>
+            <Icon class="h-full" name={link.icon} />
+          </a>
+        </li>
+      ))
+    }
   </ul>
+
   <ul class="flex h-full justify-end gap-4">
     {
       links.map((link) => (
         <li>
-          <a
-            class="flex h-full items-center rounded-full border-2 border-current p-1"
-            href={link.url}
-            target="_blank"
-          >
+          <a class="flex h-full items-center" href={link.url} target="_blank">
             <span class="sr-only">{link.description}</span>
             <Icon class="h-full" name={link.icon} />
           </a>

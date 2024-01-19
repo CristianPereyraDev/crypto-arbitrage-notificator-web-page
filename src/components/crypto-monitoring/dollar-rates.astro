@@ -1,5 +1,5 @@
 ---
-
+import Icon from "astro-icon";
 ---
 
 <style is:global>
@@ -20,11 +20,21 @@
   ul.currency-pair-rates > li > span:nth-child(1) {
     grid-column: 1/3;
     font-weight: 700;
+    color: rgb(13 148 136);
   }
 
   ul.currency-pair-rates > li > span:nth-child(n + 2) {
     grid-row: 2;
-    color: aqua;
+    color: rgb(255, 255, 255);
+  }
+
+  ul.currency-pair-rates > li > span:nth-child(n + 2) > span {
+    display: grid;
+    justify-content: center;
+  }
+
+  ul.currency-pair-rates > li > span:nth-child(n + 2) > span:first-child {
+    font-weight: 600;
   }
 
   ul.currency-pair-rates > li > span:nth-child(2) {
@@ -34,12 +44,19 @@
   ul.currency-pair-rates > li > span:nth-child(3) {
     justify-self: start;
   }
+
+  [data-icon] {
+    color: rgb(87, 255, 87);
+  }
 </style>
 
-<div
-  id="USD-ARS-container"
-  class="currency-pair-rates-container"
-  data-currency-base="USD"
-  data-currency-quote="ARS"
->
+<div class="grid h-16 auto-cols-min grid-flow-col items-center justify-center">
+  <Icon name="mdi:currency-usd" class="h-full" />
+  <div
+    id="USD-ARS-container"
+    class="currency-pair-rates-container"
+    data-currency-base="USD"
+    data-currency-quote="ARS"
+  >
+  </div>
 </div>

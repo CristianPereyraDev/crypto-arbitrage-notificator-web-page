@@ -44,7 +44,15 @@ const description = "Consulta precios crypto.";
         <slot />
       </main>
       <footer class="h-12">
-        <Footer />
+        <Footer
+          navLinks={[
+            {
+              url: "/native-app",
+              description: "CryptoARbitrage",
+              icon: "mdi:adb",
+            },
+          ]}
+        />
       </footer>
     </div>
   </body>

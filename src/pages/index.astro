@@ -15,13 +15,13 @@ try {
     });
   }
 } catch (error) {
-  console.log("Error on index.astro: %s", error);
+  console.error(error);
 }
 ---
 
 <PriceMonitoringLayout>
   <div id="symbols-container">
-    <SymbolTabs client:load pairs={availablePairs} />
+    <SymbolTabs client:only pairs={availablePairs} />
   </div>
 
   <!-- Websocket setup -->
@@ -31,6 +31,7 @@ try {
         <div
           class="on-load-message"
           ws-send
+          hx-swap="innerHTML settle:1s"
           hx-trigger="load"
           hx-vals={`{"crypto": { "asset": "${pair.crypto}", "fiat": "${pair.fiat}" }}`}
         />

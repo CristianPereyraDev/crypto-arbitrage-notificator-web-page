@@ -21,6 +21,8 @@
   grid-area: footer;
 }
 
+/* SymbolMonitor table */
+
 .symbol-table-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -29,7 +31,8 @@
 }
 
 .symbol-table-row:first-child {
-  color: rgb(65, 255, 65);
+  color: rgb(42, 255, 42);
+  font-weight: bold;
 }
 
 .symbol-table-row:nth-child(2n-1) {
@@ -40,6 +43,10 @@
   background-color: rgb(29, 29, 29);
 }
 
+.symbol-table-row > span:first-child {
+  border-left: none;
+}
+
 .symbol-table-row > span {
   display: flex;
   gap: 0.5rem;
@@ -47,10 +54,6 @@
   padding: 0.3rem;
 }
 
-.symbol-table-row span:first-child {
-  border-left: none;
-}
-
-.symbol-table-row span > img {
-  max-height: 1.3rem;
+.symbol-table-row > span img {
+  height: 1.4rem;
 }
