@@ -20,9 +20,7 @@ try {
 ---
 
 <PriceMonitoringLayout>
-  <div id="symbols-container">
-    <SymbolTabs client:only pairs={availablePairs} />
-  </div>
+  <SymbolTabs client:only pairs={availablePairs} />
 
   <!-- Websocket setup -->
   <div hx-ext="ws" ws-connect="ws://localhost:3000/websocket/web">

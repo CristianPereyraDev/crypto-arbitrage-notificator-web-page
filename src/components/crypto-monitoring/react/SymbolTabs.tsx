@@ -12,23 +12,18 @@ export default function SymbolTabs(props: SymbolTabsProps) {
   const { pairs } = props;
 
   return (
-    <div className="px-4">
-      <Tabs forceRenderTabPanel={true}>
-        <TabList className={["react-tabs__tab-list"]}>
-          {pairs.map((pair, index) => (
-            <Tab
-              key={index}
-              className={["react-tabs__tab"]}
-            >{`${pair.crypto}-${pair.fiat}`}</Tab>
-          ))}
-        </TabList>
-
+    <Tabs forceRenderTabPanel={true}>
+      <TabList>
         {pairs.map((pair, index) => (
-          <TabPanel key={index}>
-            <SymbolMonitor crypto={pair.crypto} fiat={pair.fiat} />
-          </TabPanel>
+          <Tab key={index}>{`${pair.crypto}-${pair.fiat}`}</Tab>
         ))}
-      </Tabs>
-    </div>
+      </TabList>
+
+      {pairs.map((pair, index) => (
+        <TabPanel key={index}>
+          <SymbolMonitor crypto={pair.crypto} fiat={pair.fiat} />
+        </TabPanel>
+      ))}
+    </Tabs>
   );
 }

@@ -35,12 +35,12 @@ const description = "Consulta precios crypto.";
       crossorigin="anonymous"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
   </head>
-  <body class="h-full overflow-x-hidden bg-zinc-950">
+  <body class="overflow-x-hidden bg-zinc-950">
     <div id="price-monitoring-app">
       <header class="px-4 py-2">
         <DollarRates />
       </header>
-      <main class="h-full">
+      <main class="h-full px-2">
         <slot />
       </main>
       <footer class="h-12">
