@@ -1,0 +1,78 @@
+---
+import type { ICryptoPair } from "~/types";
+
+interface Props {
+  symbol: ICryptoPair;
+}
+
+const { symbol } = Astro.props;
+---
+
+<div class="sticky top-0 grid grid-cols-2 gap-x-4 bg-gray-800 text-slate-50">
+  <section class="col-span-full flex gap-x-1 px-2 py-2">
+    <div
+      ws-send=""
+      hx-swap="innerHTML settle:1s"
+      hx-trigger="load, keyup delay:1s"
+      hx-vals={`{"crypto": { "asset": "${symbol.crypto}", "fiat": "${symbol.fiat}" }}`}
+    >
+      <input
+        id=`input-volume-${symbol.crypto}-${symbol.fiat}`
+        type="number"
+        value="100"
+        class="p3 rounded-xl border-2"
+      />
+    </div>
+  </section>
+  <div class="rounded-t-md bg-teal-400 px-2 py-1">
+    <strong>Compra</strong>
+  </div>
+  <div class="rounded-t-md bg-teal-400 px-2 py-1">
+    <strong>Venta</strong>
+  </div>
+</div>
+
+<div
+  id={`${symbol.crypto}-${symbol.fiat}-container`}
+  class="px-l-1 grid w-full grid-cols-2 gap-x-4"
+  data-asset={symbol.crypto}
+  data-fiat={symbol.fiat}
+>
+</div>
+
+<style is:global>
+  .symbol-table-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    color: rgb(255, 255, 255);
+    font-size: 0.8rem;
+  }
+
+  .symbol-table-row:first-child {
+    color: rgb(42, 255, 42);
+    font-weight: bold;
+  }
+
+  .symbol-table-row:nth-child(2n-1) {
+    background-color: rgb(22, 22, 22);
+  }
+
+  .symbol-table-row:nth-child(2n-2) {
+    background-color: rgb(29, 29, 29);
+  }
+
+  .symbol-table-row > span:first-child {
+    border-left: none;
+  }
+
+  .symbol-table-row > span {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.3rem;
+  }
+
+  .symbol-table-row > span img {
+    height: 1.4rem;
+  }
+</style>

@@ -1,27 +1,27 @@
-export interface CompatibilityItem {
-  icon: string;
-  title: string;
-  url: string;
+export interface ICompatibilityItem {
+  icon: string
+  title: string
+  url: string
 }
 
-export interface FeatureItem {
-  description: string;
-  icon: string;
-  title: string;
+export interface IFeatureItem {
+  description: string
+  icon: string
+  title: string
 }
 
-export interface FooterLink {
-  description: string;
-  icon: string;
-  url: string;
+export interface IFooterLink {
+  description: string
+  icon: string
+  url: string
 }
 
-export interface NavItem {
-  title: string;
-  url: string;
+export interface INavItem {
+  title: string
+  url: string
 }
 
 export interface ICryptoPair {
-  crypto: string;
-  fiat: string;
+  crypto: string
+  fiat: string
 }

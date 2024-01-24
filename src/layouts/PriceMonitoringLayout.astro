@@ -1,5 +1,6 @@
 ---
 import "../styles/index.css";
+import "../styles/prices.css";
 
 import "@fontsource-variable/inter";
 import Footer from "../components/footer.astro";
@@ -30,10 +31,11 @@ const description = "Consulta precios crypto.";
     <meta name="twitter:card" content="summary_large_image" />
 
     <script
+      defer
       src="https://unpkg.com/htmx.org@1.9.6"
       integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
       crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
+    <script defer src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
   </head>
   <body class="overflow-x-hidden bg-zinc-950">
     <div id="price-monitoring-app">

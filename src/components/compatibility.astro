@@ -1,9 +1,9 @@
 ---
 import CompatibilityList from "~/components/compatibility-list.astro";
 import ContentSection from "~/components/content-section.astro";
-import type { CompatibilityItem } from "~/types";
+import type { ICompatibilityItem } from "~/types";
 
-const frameworks: Array<CompatibilityItem> = [
+const frameworks: Array<ICompatibilityItem> = [
   {
     title: "React",
     icon: "frameworks/react",
@@ -36,7 +36,7 @@ const frameworks: Array<CompatibilityItem> = [
   },
 ];
 
-const platforms: Array<CompatibilityItem> = [
+const platforms: Array<ICompatibilityItem> = [
   {
     title: "Netlify",
     icon: "platforms/netlify",

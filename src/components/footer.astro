@@ -1,14 +1,14 @@
 ---
 import { Icon } from "astro-icon";
-import type { FooterLink } from "~/types";
+import type { IFooterLink } from "~/types";
 
 interface Props {
-  navLinks: Array<FooterLink>;
+  navLinks: Array<IFooterLink>;
 }
 
 const { navLinks = [] } = Astro.props;
 
-const links: Array<FooterLink> = [
+const links: Array<IFooterLink> = [
   {
     url: "https://cristianpereyradev.github.io/",
     description: "Cristian Pereyra, Full Stack Developer",

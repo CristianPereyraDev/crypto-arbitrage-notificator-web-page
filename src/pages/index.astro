@@ -1,6 +1,6 @@
 ---
 import PriceMonitoringLayout from "../layouts/PriceMonitoringLayout.astro";
-import SymbolTabs from "../components/crypto-monitoring/react/SymbolTabs";
+import SymbolTabs from "../components/crypto-monitoring/SymbolTabs.astro";
 
 let availablePairs: { crypto: string; fiat: string }[] = [];
 
@@ -20,24 +20,17 @@ try {
 ---
 
 <PriceMonitoringLayout>
-  <SymbolTabs client:only pairs={availablePairs} />
-
   <!-- Websocket setup -->
-  <div hx-ext="ws" ws-connect="ws://localhost:3000/websocket/web">
-    {
-      availablePairs.map((pair) => (
-        <div
-          class="on-load-message"
-          ws-send
-          hx-swap="innerHTML settle:1s"
-          hx-trigger="load"
-          hx-vals={`{"crypto": { "asset": "${pair.crypto}", "fiat": "${pair.fiat}" }}`}
-        />
-      ))
-    }
+  <div
+    hx-ext="ws"
+    ws-connect="ws://localhost:3000/websocket/web"
+    class="h-full"
+  >
+    <SymbolTabs pairs={availablePairs} />
+
     <div
       class="on-load-message"
-      ws-send
+      ws-send=""
       hx-trigger="load"
       hx-vals={`{"currency": { "base": "USD", "quote": "ARS" }}`}
     >
