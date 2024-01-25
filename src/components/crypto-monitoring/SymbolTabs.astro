@@ -9,11 +9,14 @@ interface Props {
 const { pairs } = Astro.props;
 ---
 
-<div class="tabs-container">
+<div id="tabs-container" class="rounded border px-2 py-2">
   <div class="tabs">
     {
-      pairs.map((pair) => (
-        <button class="tab">
+      pairs.map((pair, index) => (
+        <button
+          class="tab rounded-t border border-b-0 px-2 py-1 font-semibold"
+          data-content-id={`content-${pair.crypto}-${pair.fiat}`}
+        >
           {pair.crypto}-{pair.fiat}
         </button>
       ))
@@ -50,10 +53,36 @@ const { pairs } = Astro.props;
   }) as EventListener);
 
   // Tabs
+  let tabsContainer = document.getElementById("tabs-container");
+  let tabSelected = document.querySelector("#tabs-container .tabs .tab");
+  let tabSelectedContent = document.getElementById(
+    tabSelected?.getAttribute("data-content-id") || "",
+  );
+
+  tabSelected?.classList.add("selected");
+  tabSelectedContent?.classList.add("selected");
+
+  tabsContainer?.addEventListener("click", (event) => {
+    const target = event.target as Element;
+    if (target && target.classList.contains("tab")) {
+      tabSelected?.classList.remove("selected");
+      tabSelectedContent?.classList.remove("selected");
+
+      tabSelected = target;
+      tabSelected.classList.add("selected");
+
+      const tabContentId = tabSelected?.getAttribute("data-content-id");
+
+      if (tabContentId) {
+        tabSelectedContent = document.getElementById(tabContentId);
+        tabSelectedContent?.classList.add("selected");
+      }
+    }
+  });
 </script>
 
 <style>
-  .tabs-container {
+  #tabs-container {
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;
@@ -63,6 +92,10 @@ const { pairs } = Astro.props;
   .tabs {
     display: flex;
     gap: 1rem;
+  }
+
+  button.tab.selected {
+    background-color: rgb(115, 134, 161);
   }
 
   .content {

@@ -8,7 +8,7 @@ interface Props {
 const { symbol } = Astro.props;
 ---
 
-<div class="sticky top-0 grid grid-cols-2 gap-x-4 bg-gray-800 text-slate-50">
+<div class="sticky top-0 grid grid-cols-2 gap-x-4 text-slate-50">
   <section class="col-span-full flex gap-x-1 px-2 py-2">
     <div
       ws-send=""
@@ -16,18 +16,21 @@ const { symbol } = Astro.props;
       hx-trigger="load, keyup delay:1s"
       hx-vals={`{"crypto": { "asset": "${symbol.crypto}", "fiat": "${symbol.fiat}" }}`}
     >
+      <label for=`input-volume-${symbol.crypto}-${symbol.fiat}`
+        >Volumen =
+      </label>
       <input
         id=`input-volume-${symbol.crypto}-${symbol.fiat}`
         type="number"
         value="100"
-        class="p3 rounded-xl border-2"
+        class="h-6 rounded-md border px-2 py-1 text-xs"
       />
     </div>
   </section>
-  <div class="rounded-t-md bg-teal-400 px-2 py-1">
+  <div class="rounded-t-md bg-lime-600 px-2 py-1">
     <strong>Compra</strong>
   </div>
-  <div class="rounded-t-md bg-teal-400 px-2 py-1">
+  <div class="rounded-t-md bg-red-600 px-2 py-1">
     <strong>Venta</strong>
   </div>
 </div>
@@ -41,11 +44,42 @@ const { symbol } = Astro.props;
 </div>
 
 <style is:global>
+  .symbol-table-ask {
+    counter-reset: ask-counter;
+  }
+
+  .symbol-table-ask > .symbol-table-row {
+    counter-increment: ask-counter;
+  }
+
+  .symbol-table-bid {
+    counter-reset: bid-counter;
+  }
+
+  .symbol-table-bid > .symbol-table-row {
+    counter-increment: bid-counter;
+  }
+
   .symbol-table-row {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 3ch 2fr 1fr;
+    align-items: center;
+    padding: 0 0.2rem;
+    gap: 0.4rem;
     color: rgb(255, 255, 255);
     font-size: 0.8rem;
+  }
+
+  .symbol-table-row::before {
+    text-align: center;
+  }
+
+  .symbol-table-ask > .symbol-table-row::before {
+    content: counter(ask-counter);
+  }
+
+  .symbol-table-bid > .symbol-table-row::before {
+    content: counter(bid-counter);
   }
 
   .symbol-table-row:first-child {
