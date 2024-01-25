@@ -14,7 +14,7 @@ const { pairs } = Astro.props;
     {
       pairs.map((pair, index) => (
         <button
-          class="tab rounded-t border border-b-0 px-2 py-1 font-semibold"
+          class="tab rounded-t border border-b-0 border-slate-500 px-2 py-1 font-semibold"
           data-content-id={`content-${pair.crypto}-${pair.fiat}`}
         >
           {pair.crypto}-{pair.fiat}
@@ -95,7 +95,8 @@ const { pairs } = Astro.props;
   }
 
   button.tab.selected {
-    background-color: rgb(115, 134, 161);
+    background-color: rgb(212, 120, 44);
+    color: rgb(0, 0, 0);
   }
 
   .content {

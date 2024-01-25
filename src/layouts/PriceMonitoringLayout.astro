@@ -30,6 +30,11 @@ const description = "Consulta precios crypto.";
     <meta property="og:url" content={site} />
     <meta name="twitter:card" content="summary_large_image" />
 
+    <!-- initialize theme -->
+    <script is:inline>
+      document.documentElement.dataset.theme = "dark";
+    </script>
+
     <script
       defer
       src="https://unpkg.com/htmx.org@1.9.6"
@@ -37,7 +42,7 @@ const description = "Consulta precios crypto.";
       crossorigin="anonymous"></script>
     <script defer src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
   </head>
-  <body class="overflow-x-hidden bg-zinc-950">
+  <body class="overflow-x-hidden bg-zinc-950 text-default">
     <div id="price-monitoring-app">
       <header class="px-4 py-2">
         <DollarRates />

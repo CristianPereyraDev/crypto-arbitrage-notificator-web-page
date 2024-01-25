@@ -17,21 +17,27 @@ const { symbol } = Astro.props;
       hx-vals={`{"crypto": { "asset": "${symbol.crypto}", "fiat": "${symbol.fiat}" }}`}
     >
       <label for=`input-volume-${symbol.crypto}-${symbol.fiat}`
-        >Volumen =
+        >Volumen <span class="text-xs">({symbol.crypto})</span> =
       </label>
       <input
         id=`input-volume-${symbol.crypto}-${symbol.fiat}`
         type="number"
-        value="100"
-        class="h-6 rounded-md border px-2 py-1 text-xs"
+        value="1"
+        class="h-6 w-auto rounded-md border px-2 py-1 text-xs"
       />
     </div>
   </section>
-  <div class="rounded-t-md bg-lime-600 px-2 py-1">
-    <strong>Compra</strong>
+  <div class="relative">
+    <div class="bg-gray-800 px-2 py-1">
+      <strong>Compra</strong>
+    </div>
+    <div class="absolute bottom-0 h-8 w-full shadow-md"></div>
   </div>
-  <div class="rounded-t-md bg-red-600 px-2 py-1">
-    <strong>Venta</strong>
+  <div class="relative">
+    <div class="bg-gray-800 px-2 py-1">
+      <strong>Venta</strong>
+    </div>
+    <div class="absolute bottom-0 h-8 w-full shadow-md"></div>
   </div>
 </div>
 
@@ -88,11 +94,11 @@ const { symbol } = Astro.props;
   }
 
   .symbol-table-row:nth-child(2n-1) {
-    background-color: rgb(22, 22, 22);
+    background-color: rgb(39 39 42);
   }
 
   .symbol-table-row:nth-child(2n-2) {
-    background-color: rgb(29, 29, 29);
+    background-color: rgb(24 24 27);
   }
 
   .symbol-table-row > span:first-child {
