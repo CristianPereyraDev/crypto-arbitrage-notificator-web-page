@@ -2,9 +2,13 @@
 import type { INavItem } from "../types";
 
 const navItems: Array<INavItem> = [
+  // {
+  //   title: "Descarga",
+  //   url: "https://drive.google.com/file/d/12Xz4EgnNKDG3Rj6s15awxXnOyCMRoTE-/view?usp=sharing",
+  // },
   {
-    title: "Descarga",
-    url: "https://drive.google.com/file/d/12Xz4EgnNKDG3Rj6s15awxXnOyCMRoTE-/view?usp=sharing",
+    title: "Proximamente para descargar...",
+    url: "#",
   },
 ];
 ---
@@ -19,7 +23,7 @@ const navItems: Array<INavItem> = [
         {
           navItems.map(({ title, url }) => (
             <li>
-              <a class="font-semibold text-xl" href={url} target="_blank">
+              <a class="text-md font-semibold" href={url} target="_blank">
                 {title}
               </a>
             </li>
