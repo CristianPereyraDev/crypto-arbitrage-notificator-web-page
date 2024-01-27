@@ -3,9 +3,11 @@ import PriceMonitoringLayout from "../layouts/PriceMonitoringLayout.astro";
 import SymbolTabs from "../components/crypto-monitoring/SymbolTabs.astro";
 
 let availablePairs: { crypto: string; fiat: string }[] = [];
+const BASE_URL = import.meta.env.PUBLIC_BASE_URL;
+const WEBSOCKET_URL = import.meta.env.PUBLIC_WEBSOCKET_URL;
 
 try {
-  const response = await fetch("http://localhost:3000/api/pairs_available");
+  const response = await fetch(`${BASE_URL}/api/pairs_available`);
 
   if (response.ok) {
     const data: string[] = (await response.json()).data;
@@ -21,11 +23,7 @@ try {
 
 <PriceMonitoringLayout>
   <!-- Websocket setup -->
-  <div
-    hx-ext="ws"
-    ws-connect="ws://localhost:3000/websocket/web"
-    class="h-full"
-  >
+  <div hx-ext="ws" ws-connect={`${WEBSOCKET_URL}/websocket/web`} class="h-full">
     <SymbolTabs pairs={availablePairs} />
 
     <div

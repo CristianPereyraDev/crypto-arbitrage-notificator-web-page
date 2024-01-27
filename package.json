@@ -21,7 +21,8 @@
     "prettier-plugin-tailwindcss": "^0.5.6",
     "rimraf": "^5.0.5",
     "sass": "^1.70.0",
-    "tailwindcss-fluid-type": "^2.0.3"
+    "tailwindcss-fluid-type": "^2.0.3",
+    "vite": "^5.0.12"
   },
   "dependencies": {
     "@astrojs/react": "^3.0.9",
