@@ -9,21 +9,22 @@ const { symbol } = Astro.props;
 ---
 
 <div class="sticky top-0 z-40 grid grid-cols-2 gap-x-4 text-slate-50">
-  <section class="col-span-full flex gap-x-1 px-2 py-2">
+  <section class="col-span-full px-2 py-2">
     <div
+      class="flex gap-1"
       ws-send=""
       hx-swap="innerHTML settle:1s"
       hx-trigger="load, keyup delay:1s"
       hx-vals={`{"crypto": { "asset": "${symbol.crypto}", "fiat": "${symbol.fiat}" }}`}
     >
       <label for=`input-volume-${symbol.crypto}-${symbol.fiat}`
-        >Volumen <span class="text-xs">({symbol.crypto})</span> =
+        >Volumen <span class="hidden text-xs">({symbol.crypto})</span> =
       </label>
       <input
         id=`input-volume-${symbol.crypto}-${symbol.fiat}`
         type="number"
         value="1"
-        class="h-6 w-auto rounded-md border px-2 py-1 text-xs"
+        class="h-6 shrink rounded-md border px-2 py-1 text-xs"
       />
     </div>
   </section>
@@ -62,6 +63,11 @@ const { symbol } = Astro.props;
     counter-increment: ask-counter;
   }
 
+  .symbol-table-bid > .symbol-table-row {
+    counter-increment: bid-counter;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .symbol-table-row {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -73,24 +79,8 @@ const { symbol } = Astro.props;
     font-size: 0.8rem;
   }
 
-  .symbol-table-bid > .symbol-table-row {
-    counter-increment: bid-counter;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .symbol-table-ask > .symbol-table-row > span::before {
-    content: counter(ask-counter);
-    width: 3ch;
-  }
-
-  .symbol-table-bid > .symbol-table-row > span::before {
-    content: counter(bid-counter);
-    text-align: end;
-    width: 3ch;
-  }
-
   .symbol-table-row:first-child {
-    color: rgb(42, 255, 42);
+    border: 1px solid rgb(42, 255, 42);
     font-weight: bold;
   }
 
@@ -100,6 +90,23 @@ const { symbol } = Astro.props;
 
   .symbol-table-row:nth-child(2n-2) {
     background-color: rgb(24 24 27);
+  }
+
+  .symbol-table-ask > .symbol-table-row > span:first-child::before {
+    content: counter(ask-counter);
+    width: 3ch;
+    display: none;
+  }
+
+  .symbol-table-bid > .symbol-table-row > span:first-child::before {
+    content: counter(bid-counter);
+    text-align: end;
+    width: 3ch;
+    display: none;
+  }
+
+  .symbol-table-row span.exchange-name {
+    display: none;
   }
 
   .symbol-table-ask > .symbol-table-row > span.price {
@@ -129,11 +136,12 @@ const { symbol } = Astro.props;
     flex-direction: row-reverse;
   }
 
-  .symbol-table-row > span img {
+  .symbol-table-row > span img.exchange-logo {
     height: 1.4rem;
   }
+
   .symbol-table-row.exchange span.exchange-type {
-    display: inline-block;
+    display: none;
     width: 1em;
     height: 1em;
     --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M11.3 8.3L9.225 6.2q-.3-.3-.3-.7t.3-.7l2.078-2.1q.297-.3.706-.3q.41 0 .716.3L14.8 4.8q.3.3.3.7t-.3.7l-2.078 2.1q-.297.3-.706.3q-.41 0-.716-.3M2 20q-.425 0-.712-.288T1 19v-3q0-.85.588-1.425T3 14h3.275q.5 0 .95.25t.725.675q.725.975 1.788 1.525T12 17q1.225 0 2.288-.55t1.762-1.525q.325-.425.763-.675t.912-.25H21q.85 0 1.425.575T23 16v3q0 .425-.288.713T22 20h-5q-.425 0-.712-.288T16 19v-1.275q-.875.625-1.888.95T12 19q-1.075 0-2.1-.337T8 17.7V19q0 .425-.288.713T7 20zm2-7q-1.25 0-2.125-.875T1 10q0-1.275.875-2.137T4 7q1.275 0 2.138.863T7 10q0 1.25-.862 2.125T4 13m16 0q-1.25 0-2.125-.875T17 10q0-1.275.875-2.137T20 7q1.275 0 2.138.863T23 10q0 1.25-.862 2.125T20 13'/%3E%3C/svg%3E");
@@ -147,7 +155,7 @@ const { symbol } = Astro.props;
   }
 
   .symbol-table-row.brokerage span.exchange-type {
-    display: inline-block;
+    display: none;
     width: 1em;
     height: 1em;
     --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4'/%3E%3C/svg%3E");
@@ -158,5 +166,15 @@ const { symbol } = Astro.props;
     mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .symbol-table-row.exchange span.exchange-type,
+    .symbol-table-row.brokerage span.exchange-type {
+      display: inline-block;
+    }
+    .symbol-table-row span.exchange-name {
+      display: block;
+    }
   }
 </style>

@@ -1,0 +1,104 @@
+---
+import Icon from "astro-icon";
+---
+
+<div class="flex h-16 items-center justify-center">
+  <Icon name="mdi:currency-usd" class="hidden h-full lg:block" />
+
+  <div class="currency-pair-rates-container">
+    <div
+      id="USD-ARS-rates"
+      class="currency-pair-rates slider"
+      data-currency-base="USD"
+      data-currency-quote="ARS"
+    >
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  .currency-pair-rates-container {
+    width: 80%;
+    --slider-anim-duration: 30s;
+    overflow: hidden;
+  }
+
+  .currency-pair-rates {
+    display: flex;
+  }
+
+  @keyframes r {
+    100% {
+      transform: translateX(-700%);
+    }
+  }
+
+  .currency-pair-rates > .currency-pair-rate {
+    flex: 1 0 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 0.8rem;
+    justify-items: center;
+    font-size: 0.8rem;
+    animation: r var(--slider-anim-duration) linear infinite;
+  }
+
+  .currency-pair-rates > .currency-pair-rate > span:nth-child(1) {
+    grid-column: 1/3;
+    font-weight: 700;
+    color: rgb(13 148 136);
+  }
+
+  .currency-pair-rates > .currency-pair-rate > span:nth-child(n + 2) {
+    grid-row: 2;
+    color: rgb(255, 255, 255);
+  }
+
+  .currency-pair-rates > .currency-pair-rate > span:nth-child(n + 2) > span {
+    display: grid;
+    justify-content: center;
+  }
+
+  .currency-pair-rates
+    > .currency-pair-rate
+    > span:nth-child(n + 2)
+    > span:first-child {
+    font-weight: 600;
+  }
+
+  .currency-pair-rates > .currency-pair-rate > span:nth-child(2) {
+    justify-self: end;
+  }
+
+  .currency-pair-rates > .currency-pair-rate > span:nth-child(3) {
+    justify-self: start;
+  }
+
+  [data-icon] {
+    color: rgb(87, 255, 87);
+  }
+
+  @media (min-width: 768px) {
+    .currency-pair-rates-container {
+      width: 50%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .currency-pair-rates-container {
+      --slider-anim-duration: 30s;
+      overflow: hidden;
+    }
+    .currency-pair-rates {
+      gap: 0.8rem;
+    }
+
+    .currency-pair-rates > .currency-pair-rate:last-child {
+      display: none;
+    }
+    .currency-pair-rates > .currency-pair-rate {
+      flex: 1;
+      animation: none;
+    }
+  }
+</style>
