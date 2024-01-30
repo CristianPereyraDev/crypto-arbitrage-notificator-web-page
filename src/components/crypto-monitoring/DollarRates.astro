@@ -3,10 +3,10 @@ import Icon from "astro-icon";
 ---
 
 <div class="flex items-center justify-center">
-  <Icon name="mdi:currency-usd" class="hidden h-full lg:block" />
+  <Icon name="mdi:currency-usd" class="" width="50" />
   <div
     id="USD-ARS-rates"
-    class="currency-pair-rates grid grid-cols-3 gap-2"
+    class="currency-pair-rates grow"
     data-currency-base="USD"
     data-currency-quote="ARS"
   >
@@ -14,6 +14,11 @@ import Icon from "astro-icon";
 </div>
 
 <style is:global>
+  .currency-pair-rates {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    gap: 0.5rem;
+  }
   .currency-pair-rates > .currency-pair-rate {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -55,15 +60,5 @@ import Icon from "astro-icon";
 
   [data-icon] {
     color: rgb(87, 255, 87);
-  }
-
-  .currency-pair-rates > .currency-pair-rate:last-child {
-    display: none;
-  }
-
-  @media (min-width: 768px) {
-  }
-
-  @media (min-width: 1024px) {
   }
 </style>
