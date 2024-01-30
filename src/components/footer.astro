@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 import type { IFooterLink } from "../types";
 
 interface Props {
@@ -40,9 +40,9 @@ const links: Array<IFooterLink> = [
       navLinks.map((link) => (
         <li class="h-full grow">
           <a class="flex h-full items-center" href={link.url} target="_blank">
-            <span class="font-bold text-xs">{link.description}</span>
-            <span class="h-full">
-              <Icon class="h-full text-green-500" name={link.icon} />
+            <span class="font-bold text-sm">{link.description}</span>
+            <span>
+              <Icon class="text-green-500 text-sm" name={link.icon} />
             </span>
           </a>
         </li>
@@ -53,10 +53,10 @@ const links: Array<IFooterLink> = [
   <ul class="flex h-full gap-4">
     {
       links.map((link) => (
-        <li class="h-full grow">
+        <li class="grow">
           <a class="flex h-full items-center" href={link.url} target="_blank">
             <span class="sr-only">{link.description}</span>
-            <Icon class="h-full" name={link.icon} />
+            <Icon class="text-lg lg:text-xl" name={link.icon} />
           </a>
         </li>
       ))

@@ -1,9 +1,9 @@
 ---
-import Icon from "astro-icon";
+import { Icon } from "astro-icon/components";
 ---
 
 <div class="ws-content flex items-center justify-center">
-  <Icon name="mdi:currency-usd" class="" width="50" />
+  <Icon name="mdi:currency-usd" size={50} />
   <div
     id="USD-ARS-rates"
     class="currency-pair-rates grow"
@@ -59,7 +59,7 @@ import Icon from "astro-icon";
     justify-self: start;
   }
 
-  [data-icon] {
-    color: rgb(87, 255, 87);
+  [data-icon="mdi:currency-usd"] {
+    color: rgb(121, 164, 113);
   }
 </style>
