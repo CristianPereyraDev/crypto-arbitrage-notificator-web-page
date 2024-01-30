@@ -1,6 +1,7 @@
 ---
 import SymbolMonitor from "./SymbolMonitor.astro";
 import type { ICryptoPair } from "../../types";
+import { Icon } from "astro-icon/components";
 
 interface Props {
   pairs: Array<ICryptoPair>;
@@ -22,7 +23,8 @@ const { pairs } = Astro.props;
       ))
     }
   </div>
-  <section class="content">
+  <section class="content ws-content">
+    <Icon name="svg-spinners:blocks-scale" class="htmx-indicator" />
     {
       pairs.map((pair, index) => (
         <div

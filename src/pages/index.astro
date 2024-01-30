@@ -23,7 +23,7 @@ try {
 
 <PriceMonitoringLayout>
   <!-- Websocket setup -->
-  <div hx-ext="ws" ws-connect={`${WEBSOCKET_URL}/websocket/web`} hx-indicator=".ws-content" class="h-full">
+  <div hx-ext="ws" ws-connect={`${WEBSOCKET_URL}/websocket/web`} class="h-full">
     <SymbolTabs pairs={availablePairs} />
 
     <div
@@ -35,3 +35,21 @@ try {
     </div>
   </div>
 </PriceMonitoringLayout>
+
+<script>
+  document.body.addEventListener("htmx:wsConnecting", ((event: CustomEvent) => {
+    if (event.detail.event.type === "connecting") {
+      document.querySelectorAll(".ws-content").forEach((elem) => {
+        elem.classList.add("htmx-request");
+      });
+    }
+  }) as EventListener);
+
+  document.body.addEventListener("htmx:wsAfterMessage", ((
+    event: CustomEvent,
+  ) => {
+    document.querySelectorAll(".ws-content").forEach((elem) => {
+      elem.classList.remove("htmx-request");
+    });
+  }) as EventListener);
+</script>
