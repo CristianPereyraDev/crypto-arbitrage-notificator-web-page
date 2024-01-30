@@ -23,7 +23,7 @@ try {
 
 <PriceMonitoringLayout>
   <!-- Websocket setup -->
-  <div hx-ext="ws" ws-connect={`${WEBSOCKET_URL}/websocket/web`} class="h-full">
+  <div hx-ext="ws" ws-connect={`${WEBSOCKET_URL}/websocket/web`} hx-indicator=".ws-content" class="h-full">
     <SymbolTabs pairs={availablePairs} />
 
     <div
