@@ -10,12 +10,12 @@ interface Props {
 const { pairs } = Astro.props;
 ---
 
-<div id="tabs-container" class="px-2 py-2">
-  <div class="tabs">
+<div id="tabs-container" class="divide-y divide-slate-700 px-2 py-2">
+  <div class="tabs px-1">
     {
       pairs.map((pair, index) => (
         <button
-          class="tab rounded-t border border-b-0 border-slate-500 px-2 py-1 font-semibold"
+          class="tab rounded-t border border-b-0 border-slate-500 px-2 py-1 font-semibold hover:border-slate-50"
           data-content-id={`content-${pair.crypto}-${pair.fiat}`}
         >
           {pair.crypto}-{pair.fiat}
@@ -24,7 +24,6 @@ const { pairs } = Astro.props;
     }
   </div>
   <section class="content ws-content">
-    <Icon name="svg-spinners:blocks-scale" class="htmx-indicator" />
     {
       pairs.map((pair, index) => (
         <div
@@ -97,8 +96,8 @@ const { pairs } = Astro.props;
   }
 
   button.tab.selected {
-    background-color: rgb(212, 120, 44);
-    color: rgb(0, 0, 0);
+    background-color: var(--color-primary);
+    color: rgb(255, 255, 255);
   }
 
   .content {

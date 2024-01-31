@@ -11,7 +11,7 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --color-primary: theme("colors.orange.500");
+  --color-primary: theme("colors.teal.600");
   --color-secondary: theme("colors.cyan.400");
   --color-text: theme("colors.gray.50");
   --color-text-offset: theme("colors.gray.400");
