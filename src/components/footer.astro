@@ -42,7 +42,10 @@ const links: Array<IFooterLink> = [
           <a class="flex h-full items-center" href={link.url} target="_blank">
             <span class="font-bold text-sm">{link.description}</span>
             <span>
-              <Icon class="text-green-500 text-sm" name={link.icon} />
+              <Icon
+                class="text-green-500 text-lg lg:text-xl"
+                name={link.icon}
+              />
             </span>
           </a>
         </li>
@@ -56,7 +59,7 @@ const links: Array<IFooterLink> = [
         <li class="grow">
           <a class="flex h-full items-center" href={link.url} target="_blank">
             <span class="sr-only">{link.description}</span>
-            <Icon class="text-lg lg:text-xl" name={link.icon} />
+            <Icon class="text-lg lg:text-2xl" name={link.icon} />
           </a>
         </li>
       ))
