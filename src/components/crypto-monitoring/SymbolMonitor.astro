@@ -29,6 +29,9 @@ const { symbol } = Astro.props;
         value="1"
         class="h-6 shrink rounded-md border px-2 py-1 text-xs"
       />
+      <div class="htmx-indicator ws-indicator grow">
+        <Icon name="svg-spinners:blocks-scale" class="" size={25} />
+      </div>
     </div>
   </section>
   <div class="relative grid grid-cols-2 bg-gray-800">
@@ -95,15 +98,24 @@ const { symbol } = Astro.props;
     background-color: rgb(24 24 27);
   }
 
-  .symbol-table-ask > .symbol-table-row > span:first-child::before {
+  .symbol-table-row > span.data {
+    border-left: none;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.3rem;
+  }
+
+  .symbol-table-ask > .symbol-table-row > span.data::before {
     content: counter(ask-counter);
+    text-align: end;
     width: 3ch;
     display: none;
   }
 
-  .symbol-table-bid > .symbol-table-row > span:first-child::before {
+  .symbol-table-bid > .symbol-table-row > span.data::before {
     content: counter(bid-counter);
-    text-align: end;
+    text-align: start;
     width: 3ch;
     display: none;
   }
@@ -113,29 +125,23 @@ const { symbol } = Astro.props;
   }
 
   .symbol-table-ask > .symbol-table-row > span.price {
-    justify-self: center;
-  }
-
-  .symbol-table-bid > .symbol-table-row > span.price {
     grid-column: 1;
     grid-row: 1;
     justify-self: center;
   }
 
-  .symbol-table-bid > .symbol-table-row > span:first-child {
+  .symbol-table-bid > .symbol-table-row > span.price {
     grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+  }
+
+  .symbol-table-bid > .symbol-table-row > span.data {
+    grid-column: 1;
     grid-row: 1;
   }
 
-  .symbol-table-row > span:first-child {
-    border-left: none;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    padding: 0.3rem;
-  }
-
-  .symbol-table-bid .symbol-table-row > span:first-child {
+  .symbol-table-ask .symbol-table-row > span:first-child {
     flex-direction: row-reverse;
   }
 
@@ -177,6 +183,13 @@ const { symbol } = Astro.props;
       display: inline-block;
     }
     .symbol-table-row span.exchange-name {
+      display: block;
+    }
+    .symbol-table-ask > .symbol-table-row > span:first-child::before {
+      display: block;
+    }
+
+    .symbol-table-bid > .symbol-table-row > span:first-child::before {
       display: block;
     }
   }
