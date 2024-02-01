@@ -112,16 +112,20 @@ const { symbol } = Astro.props;
     content: counter(ask-counter);
     text-align: start;
     width: 3ch;
+    display: none;
   }
 
   .symbol-table-bid > .symbol-table-row > span.data::before {
     content: counter(bid-counter);
     text-align: end;
     width: 3ch;
+    display: none;
   }
 
   .symbol-table-row span.exchange-name {
+    font-size: 0.6rem;
     display: inline-block;
+    text-wrap: nowrap;
   }
 
   .symbol-table-ask > .symbol-table-row > span.price {
@@ -188,6 +192,10 @@ const { symbol } = Astro.props;
     .symbol-table-row > span img.exchange-logo {
       display: block;
       height: 1.4rem;
+    }
+
+    .symbol-table-row span.exchange-name {
+      font-size: 0.875rem;
     }
   }
 
