@@ -14,7 +14,7 @@ const { symbol } = Astro.props;
 >
   <section class="col-span-full px-2 py-2">
     <div
-      class="flex gap-1"
+      class="grid grid-flow-col gap-1"
       ws-send=""
       hx-swap="innerHTML settle:1s"
       hx-trigger="load, keyup delay:1s"
@@ -22,16 +22,13 @@ const { symbol } = Astro.props;
     >
       <label for=`input-volume-${symbol.crypto}-${symbol.fiat}`
         >Volumen <span class="hidden text-xs">({symbol.crypto})</span> =
+        <input
+          id=`input-volume-${symbol.crypto}-${symbol.fiat}`
+          type="number"
+          value="1"
+          class="h-6 rounded-md border px-2 py-1 text-xs"
+        />
       </label>
-      <input
-        id=`input-volume-${symbol.crypto}-${symbol.fiat}`
-        type="number"
-        value="1"
-        class="h-6 shrink rounded-md border px-2 py-1 text-xs"
-      />
-      <div class="htmx-indicator ws-indicator grow">
-        <Icon name="svg-spinners:blocks-scale" class="" size={25} />
-      </div>
     </div>
   </section>
   <div class="relative grid grid-cols-2 bg-gray-800">

@@ -37,19 +37,12 @@ try {
 </PriceMonitoringLayout>
 
 <script>
-  document.body.addEventListener("htmx:wsConnecting", ((event: CustomEvent) => {
-    if (event.detail.event.type === "connecting") {
-      document.querySelectorAll(".ws-content").forEach((elem) => {
-        elem.classList.add("htmx-request");
-      });
-    }
-  }) as EventListener);
-
   document.body.addEventListener("htmx:wsAfterMessage", ((
     event: CustomEvent,
   ) => {
-    document.querySelectorAll(".ws-content").forEach((elem) => {
-      elem.classList.remove("htmx-request");
-    });
+    const appLoadingElem = document.querySelector(
+      "#app-loading-indicator",
+    ) as HTMLElement;
+    appLoadingElem.style.display = "none";
   }) as EventListener);
 </script>

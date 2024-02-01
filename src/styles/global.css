@@ -10,17 +10,3 @@ a,
   @apply bg-clip-text text-transparent;
   @apply bg-gradient-to-b from-orange-500 via-amber-500 to-cyan-400;
 }
-
-.htmx-indicator {
-  display: none;
-  opacity: 0;
-  transition: opacity 500ms ease-in;
-}
-.htmx-request .htmx-indicator {
-  display: inline;
-  opacity: 1;
-}
-.htmx-request.htmx-indicator {
-  display: inline;
-  opacity: 1;
-}

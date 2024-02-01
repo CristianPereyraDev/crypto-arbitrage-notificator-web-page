@@ -23,3 +23,17 @@
 #price-monitoring-app > footer {
   grid-area: footer;
 }
+
+#app-loading-indicator .app-icon {
+  animation: myAnim 3s linear infinite;
+}
+
+@keyframes myAnim {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
