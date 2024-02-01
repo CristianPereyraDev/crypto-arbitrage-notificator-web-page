@@ -10,7 +10,7 @@ const { symbol } = Astro.props;
 ---
 
 <div
-  class="sticky top-0 z-40 grid grid-cols-2 gap-x-4 bg-zinc-950 text-slate-50"
+  class="sticky top-0 z-40 grid grid-cols-2 gap-x-0 bg-zinc-950 text-slate-50 lg:gap-x-4"
 >
   <section class="col-span-full px-2 py-2">
     <div
@@ -47,7 +47,7 @@ const { symbol } = Astro.props;
 
 <div
   id={`${symbol.crypto}-${symbol.fiat}-container`}
-  class="px-l-1 grid w-full grid-cols-2 gap-x-4"
+  class="px-l-1 grid w-full grid-cols-2 gap-x-0 lg:gap-x-4"
   data-asset={symbol.crypto}
   data-fiat={symbol.fiat}
 >
@@ -103,52 +103,57 @@ const { symbol } = Astro.props;
   .symbol-table-row > span.data {
     border-left: none;
     display: flex;
-    gap: 1rem;
+    gap: 0.8rem;
     align-items: center;
     padding: 0.3rem;
   }
 
   .symbol-table-ask > .symbol-table-row > span.data::before {
     content: counter(ask-counter);
-    text-align: end;
+    text-align: start;
     width: 3ch;
-    display: none;
   }
 
   .symbol-table-bid > .symbol-table-row > span.data::before {
     content: counter(bid-counter);
-    text-align: start;
+    text-align: end;
     width: 3ch;
-    display: none;
   }
 
   .symbol-table-row span.exchange-name {
-    display: none;
+    display: inline-block;
   }
 
   .symbol-table-ask > .symbol-table-row > span.price {
-    grid-column: 1;
-    grid-row: 1;
-    justify-self: center;
-  }
-
-  .symbol-table-bid > .symbol-table-row > span.price {
     grid-column: 2;
     grid-row: 1;
     justify-self: center;
   }
 
-  .symbol-table-bid > .symbol-table-row > span.data {
+  .symbol-table-ask > .symbol-table-row > span.data {
+    overflow: hidden;
     grid-column: 1;
     grid-row: 1;
   }
 
-  .symbol-table-ask .symbol-table-row > span:first-child {
+  .symbol-table-bid > .symbol-table-row > span.price {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: center;
+  }
+
+  .symbol-table-bid > .symbol-table-row > span.data {
+    overflow: hidden;
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .symbol-table-bid .symbol-table-row > span:first-child {
     flex-direction: row-reverse;
   }
 
   .symbol-table-row > span img.exchange-logo {
-    height: 1.4rem;
+    display: none;
   }
 
   .symbol-table-row.exchange span.exchange-type {
@@ -179,13 +184,17 @@ const { symbol } = Astro.props;
     mask-size: 100% 100%;
   }
 
+  @media (min-width: 768px) {
+    .symbol-table-row > span img.exchange-logo {
+      display: block;
+      height: 1.4rem;
+    }
+  }
+
   @media (min-width: 1024px) {
     .symbol-table-row.exchange span.exchange-type,
     .symbol-table-row.brokerage span.exchange-type {
       display: inline-block;
-    }
-    .symbol-table-row span.exchange-name {
-      display: block;
     }
     .symbol-table-ask > .symbol-table-row > span:first-child::before {
       display: block;
