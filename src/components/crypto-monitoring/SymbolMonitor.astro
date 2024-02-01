@@ -51,6 +51,11 @@ const { symbol } = Astro.props;
   data-asset={symbol.crypto}
   data-fiat={symbol.fiat}
 >
+  <div
+    class="col-span-full row-span-full mt-2 grid h-full w-full content-center justify-center"
+  >
+    <Icon name="svg-spinners:blocks-scale" size={50} />
+  </div>
 </div>
 
 <style is:global>
