@@ -20,8 +20,8 @@ const { symbol } = Astro.props;
       hx-trigger="load, keyup delay:1s"
       hx-vals={`{"crypto": { "asset": "${symbol.crypto}", "fiat": "${symbol.fiat}" }}`}
     >
-      <label for=`input-volume-${symbol.crypto}-${symbol.fiat}`
-        >Volumen <span class="hidden text-xs">({symbol.crypto})</span> =
+      <label>
+        Volumen <span class="hidden text-xs">({symbol.crypto})</span> =
         <input
           id=`input-volume-${symbol.crypto}-${symbol.fiat}`
           type="number"

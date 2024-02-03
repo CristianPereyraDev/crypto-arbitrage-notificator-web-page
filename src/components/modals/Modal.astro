@@ -1,0 +1,30 @@
+---
+import CustomButton from "../buttons/CustomButton.astro";
+const { id, open } = Astro.props;
+---
+
+<button onclick={`window.${id}.showModal()`}>
+  <slot name="icon" />
+</button>
+
+<dialog id={id}>
+  <div class="p-4">
+    <slot name="main" />
+    <form method="dialog" class="mt-4">
+      <CustomButton
+        id="close-settings-button"
+        onclick={"htmx.trigger(this, 'confirmed');"}
+      >
+        Cerrar
+      </CustomButton>
+    </form>
+  </div>
+</dialog>
+
+<style lang="scss">
+  dialog {
+    &::backdrop {
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
+</style>
