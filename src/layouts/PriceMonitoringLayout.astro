@@ -6,13 +6,31 @@ import "@fontsource-variable/inter";
 import Footer from "../components/footer.astro";
 import DollarRates from "../components/crypto-monitoring/DollarRates.astro";
 import { Icon } from "astro-icon/components";
-import Modal from "../components/modals/Modal.astro";
-import CustomButton from "../components/buttons/CustomButton.astro";
+import ConfigurationBar from "../components/ConfigurationBar.astro";
 
 const { generator, site } = Astro;
-const image = new URL("social.png", site);
+const image = new URL("prices_page.png", site);
 const description = "Consulta precios crypto.";
 const WEBSOCKET_URL = import.meta.env.PUBLIC_WEBSOCKET_URL;
+const BASE_URL = import.meta.env.PUBLIC_BASE_URL;
+const CRYPTO_ARBITRAGE_API_KEY = import.meta.env
+  .PUBLIC_CRYPTO_ARBITRAGE_API_KEY;
+let token = "";
+
+try {
+  const response = await fetch(`${BASE_URL}/api/apiToken`, {
+    method: "POST",
+    headers: {
+      "x-api-key": CRYPTO_ARBITRAGE_API_KEY,
+    },
+  });
+
+  if (response.ok) {
+    token = (await response.json()).token;
+  }
+} catch (error) {
+  console.error(error);
+}
 ---
 
 <!doctype html>
@@ -50,21 +68,11 @@ const WEBSOCKET_URL = import.meta.env.PUBLIC_WEBSOCKET_URL;
     <div
       id="price-monitoring-app"
       hx-ext="ws"
-      ws-connect={`${WEBSOCKET_URL}/websocket/web`}
+      ws-connect={`${WEBSOCKET_URL}/websocket/web?at=${token}`}
     >
-      <header class="w-full px-4 py-2">
+      <header class="grid w-full gap-2 px-2 py-2 lg:px-4">
         <DollarRates />
-        <Modal id="dialog" open="Open modal">
-          <Icon slot="icon" name="mdi:settings" />
-          <main slot="main">
-            <form id="form-settings" ws-send hx-trigger="confirmed from:body">
-              <label>
-                <input type="checkbox" name="includeFees" />
-                <span>Incluir comisiones (Compra y Venta)</span>
-              </label>
-            </form>
-          </main>
-        </Modal>
+        <ConfigurationBar />
       </header>
       <main class="h-full lg:px-2">
         <slot />

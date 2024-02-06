@@ -7,7 +7,10 @@ const { id, customClass, onclick } = Astro.props;
     aria-label="Close"
     id={id ? id : null}
     onclick={onclick ? onclick : null}
-    class="rounded bg-teal-600 px-4 py-1 shadow hover:bg-teal-500 hover:text-current"
+    class:list={[
+      "rounded bg-teal-600 px-4 py-1 shadow hover:bg-teal-500 hover:text-current",
+      customClass,
+    ]}
   >
     <slot />
   </button>
