@@ -11,19 +11,11 @@ import ConfigurationBar from "../components/ConfigurationBar.astro";
 const { generator, site } = Astro;
 const image = new URL("prices_page.png", site);
 const description = "Consulta precios crypto.";
-const WEBSOCKET_URL = import.meta.env.PUBLIC_WEBSOCKET_URL;
-const BASE_URL = import.meta.env.PUBLIC_BASE_URL;
-const CRYPTO_ARBITRAGE_API_KEY = import.meta.env
-  .PUBLIC_CRYPTO_ARBITRAGE_API_KEY;
+const cryptoArbitrageWebsocketURL = import.meta.env.PUBLIC_CRYPTO_ARBITRAGE_WEBSOCKET_URL;
 let token = "";
 
 try {
-  const response = await fetch(`${BASE_URL}/api/apiToken`, {
-    method: "POST",
-    headers: {
-      "x-api-key": CRYPTO_ARBITRAGE_API_KEY,
-    },
-  });
+  const response = await fetch(`${Astro.url.origin}/token`);
 
   if (response.ok) {
     token = (await response.json()).token;
@@ -68,7 +60,7 @@ try {
     <div
       id="price-monitoring-app"
       hx-ext="ws"
-      ws-connect={`${WEBSOCKET_URL}/websocket/web?at=${token}`}
+      ws-connect={`${cryptoArbitrageWebsocketURL}/websocket/web?at=${token}`}
     >
       <header class="grid w-full gap-2 px-2 py-2 lg:px-4">
         <DollarRates />

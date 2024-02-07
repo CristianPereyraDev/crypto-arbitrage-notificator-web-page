@@ -3,10 +3,10 @@ import PriceMonitoringLayout from "../layouts/PriceMonitoringLayout.astro";
 import SymbolTabs from "../components/crypto-monitoring/SymbolTabs.astro";
 
 let availablePairs: { crypto: string; fiat: string }[] = [];
-const BASE_URL = import.meta.env.PUBLIC_BASE_URL;
+const cryptoArbitrageAPIURL = import.meta.env.PUBLIC_CRYPTO_ARBITRAGE_API_URL
 
 try {
-  const response = await fetch(`${BASE_URL}/api/pairs_available`);
+  const response = await fetch(`${cryptoArbitrageAPIURL}/api/pairs_available`);
 
   if (response.ok) {
     const data: string[] = (await response.json()).data;
