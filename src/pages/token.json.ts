@@ -1,6 +1,8 @@
+import type { APIContext, APIRoute } from "astro";
+
 export const prerender = false;
 
-export async function GET() {
+export const GET: APIRoute = async (context: APIContext) => {
   const cryptoArbitrageAPIURL = import.meta.env.PUBLIC_CRYPTO_ARBITRAGE_API_URL
   const cryptoArbitrageAPIKey = import.meta.env.PUBLIC_CRYPTO_ARBITRAGE_API_KEY
 
@@ -15,7 +17,12 @@ export async function GET() {
     if (response.ok) {
       const token = (await response.json())
 
-      return new Response(JSON.stringify(token), { status: 200 })
+      return new Response(JSON.stringify(token), {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
     } else {
       return new Response(null, { status: 400 })
     }

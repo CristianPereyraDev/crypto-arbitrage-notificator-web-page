@@ -15,7 +15,7 @@ const cryptoArbitrageWebsocketURL = import.meta.env.PUBLIC_CRYPTO_ARBITRAGE_WEBS
 let token = "";
 
 try {
-  const response = await fetch(`https://cryptoarbitrage.netlify.app/token`);
+  const response = await fetch(`${Astro.url}/token.json`);
 
   if (response.ok) {
     token = (await response.json()).token;
