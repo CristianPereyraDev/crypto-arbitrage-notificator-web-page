@@ -1,7 +1,5 @@
 import type { APIContext, APIRoute } from "astro";
 
-export const prerender = false;
-
 export const GET: APIRoute = async (context: APIContext) => {
   const cryptoArbitrageAPIURL = import.meta.env.PUBLIC_CRYPTO_ARBITRAGE_API_URL
   const cryptoArbitrageAPIKey = import.meta.env.PUBLIC_CRYPTO_ARBITRAGE_API_KEY
