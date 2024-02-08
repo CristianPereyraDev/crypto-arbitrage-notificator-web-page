@@ -16,6 +16,7 @@
     "@types/micromodal": "^0.3.3",
     "astro": "^4.3.3",
     "eslint": "^8.56.0",
+    "netlify-cli": "^17.16.0",
     "rimraf": "^5.0.5",
     "sass": "^1.70.0",
     "tailwindcss-fluid-type": "^2.0.3",
