@@ -2,7 +2,7 @@
 export const prerender = false;
 
 import PriceMonitoringLayout from "../layouts/PriceMonitoringLayout.astro";
-import SymbolTabs from "../components/crypto-monitoring/SymbolTabs.astro";
+import CrossExchangeMonitor from "../components/crypto-monitoring/CrossExchangeMonitor.astro";
 
 let availablePairs: { crypto: string; fiat: string }[] = [];
 const cryptoArbitrageAPIURL = import.meta.env.PUBLIC_CRYPTO_ARBITRAGE_API_URL
@@ -23,18 +23,8 @@ try {
 ---
 
 <PriceMonitoringLayout>
-  <!-- Websocket setup -->
-  <div class="h-full">
-    <SymbolTabs pairs={availablePairs} />
-
-    <div
-      class="on-load-message"
-      ws-send=""
-      hx-trigger="load"
-      hx-vals={`{"currency": { "base": "USD", "quote": "ARS" }}`}
-    >
-    </div>
-  </div>
+  <!-- Websocket setup --> 
+  <CrossExchangeMonitor pairs={availablePairs} />  
 </PriceMonitoringLayout>
 
 <script>

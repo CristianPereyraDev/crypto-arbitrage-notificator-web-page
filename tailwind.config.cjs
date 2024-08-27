@@ -18,6 +18,8 @@ module.exports = {
       backgroundColor: {
         default: "var(--color-background)",
         offset: "var(--color-background-offset)",
+        surface: "var(--color-surface)",
+        onSurface: "var(--color-surface-offset)"
       },
       borderColor: {
         default: "var(--color-border)",

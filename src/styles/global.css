@@ -10,3 +10,7 @@ a,
   @apply bg-clip-text text-transparent;
   @apply bg-gradient-to-b from-orange-500 via-amber-500 to-cyan-400;
 }
+
+div {
+  scrollbar-width: thin;
+}

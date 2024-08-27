@@ -1,12 +1,11 @@
 ---
-import "../styles/index.css";
-import "../styles/prices.css";
+import "../styles/price_monitoring_layout.css";
 
 import "@fontsource-variable/inter";
-import Footer from "../components/footer.astro";
-import DollarRates from "../components/crypto-monitoring/DollarRates.astro";
 import { Icon } from "astro-icon/components";
-import ConfigurationBar from "../components/ConfigurationBar.astro";
+
+import Footer from "../components/footer.astro";
+import CurrencyRates from "../components/preact/CurrencyRates"
 
 const { generator, site } = Astro;
 const image = new URL("prices_page.png", site);
@@ -56,20 +55,27 @@ try {
       crossorigin="anonymous"></script>
     <script defer src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
   </head>
-  <body class="overflow-x-hidden bg-zinc-950 text-default">
+  <body class="overflow-x-hidden bg-default text-default">
     <div
       id="price-monitoring-app"
       hx-ext="ws"
       ws-connect={`${cryptoArbitrageWebsocketURL}/websocket/web?at=${token}`}
     >
-      <header class="grid w-full gap-2 px-2 py-2 lg:px-4">
-        <DollarRates />
-        <ConfigurationBar />
+      <header class="grid auto-rows-min w-full justify-items-center">
+        <div class="header-content flex items-center justify-center h-0 transition-all md:px-2 md:py-2 md:h-full">
+          <Icon name="mdi:currency-usd" size={50} class="text-[--color-primary] hidden lg:block" />
+          <CurrencyRates client:visible />
+        </div>
+        <button class="flex justify-center items-center bg-onSurface w-full md:hidden">
+          <span class="text-xs text-[--color-primary]">Dollar</span>
+          <Icon class="text-offset" name="mdi:chevron-down" />
+          <Icon class="text-offset" name="mdi:chevron-up" />
+        </button>
       </header>
-      <main class="h-full lg:px-2">
+      <main class="h-full md:py-2 lg:px-2">
         <slot />
       </main>
-      <footer class="px-2 py-2">
+      <footer class="px-2 py-2 border-t border-default">
         <Footer
           navLinks={[
             {
@@ -91,3 +97,35 @@ try {
     </div>
   </body>
 </html>
+
+<style>
+  .header-content.expanded {
+    height: 100%;
+    padding: 0.5rem;
+  }
+
+  .header-content.expanded + button > [data-icon='mdi:chevron-down'] {
+    display: none;
+  }
+
+  .header-content.expanded + button > [data-icon='mdi:chevron-up'] {
+    display: block;
+  }
+
+  .header-content + button > [data-icon='mdi:chevron-down'] {
+    display: block;
+  }
+
+  .header-content + button > [data-icon='mdi:chevron-up'] {
+    display: none;
+  }
+</style>
+
+<script>
+  const headerContentElem = document.querySelector(".header-content");
+  const expandButtonElem = document.querySelector(".header-content + button");
+
+  expandButtonElem?.addEventListener("click", () => {
+    headerContentElem?.classList.toggle("expanded");
+  });
+</script>
