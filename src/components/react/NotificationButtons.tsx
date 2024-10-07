@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import {
   Button,
@@ -11,18 +11,20 @@ import {
   Select,
   Option,
 } from '@material-tailwind/react';
+import { MdOutlineWarning } from 'react-icons/md';
 
 import {
   subscribeToArbitrage,
   unsubscribeToArbitrage,
 } from '../../scripts/push-notifications/subscription.ts';
-import { MdiBellRing } from './icons/MdiBellRing.tsx';
 import ProfitSlider from './ProfitSlider.tsx';
 import { MdiBellPlus } from './icons/MdiBellPlus.tsx';
 import { MdiBellMinus } from './icons/MdiBellMinus.tsx';
 
-export default function NotificationButton() {
+export default function NotificationButtons() {
   const [open, setOpen] = useState(false);
+  const [openDeniedPermissionDialog, setOpenDeniedPermissionDialog] =
+    useState(false);
   const [subscribed, setSubscribed] = useState(false);
   const [minProfit, setMinProfit] = useState<string | undefined>('0.8');
   const [volume, setVolume] = useState<string | undefined>('1.0');
@@ -36,20 +38,35 @@ export default function NotificationButton() {
   const notify = (message: string, isError: boolean = false) =>
     !isError ? toast.success(message) : toast.error(message);
 
-  const showNotification = () => {
+  const handleRemoveNotifications = () => {
+    unsubscribeToArbitrage()
+      .then(() => {
+        setSubscribed(false);
+        notify('Successfully unsubscribed.');
+      })
+      .catch(() => notify('Ha ocurrido un error.', true));
+  };
+
+  const handleOpen = () => setOpen(!open);
+
+  const handleSubscribe = () => {
+    if (!validate()) {
+      return;
+    }
     if ('Notification' in window) {
       if (Notification.permission === 'granted') {
-        if (!subscribed) {
-          setOpen(true);
-        } else {
-          unsubscribeToArbitrage()
-            .then(() => {
-              setSubscribed(false);
-              notify('Successfully unsubscribed.');
-            })
-            .catch(() => notify('Ha ocurrido un error.', true));
-        }
+        setOpen(false);
+
+        subscribeToArbitrage(Number(minProfit), Number(volume), crypto, fiat)
+          .then(() => {
+            setSubscribed(true);
+            notify('Success.');
+          })
+          .catch(() => notify(String('Ha ocurrido un error.'), true));
+
+        console.log(`${minProfit} ${volume} ${crypto} ${fiat}`);
       } else {
+        console.log('Notification.permission: ', Notification.permission);
         return new Promise(function (resolve, reject) {
           const permissionResult = Notification.requestPermission(function (
             result
@@ -62,29 +79,10 @@ export default function NotificationButton() {
           }
         }).then(function (permissionResult) {
           if (permissionResult !== 'granted') {
-            throw new Error("We weren't granted permission.");
+            setOpenDeniedPermissionDialog(true);
           }
         });
       }
-    } else {
-      alert('This browser does not support notifications.');
-    }
-  };
-
-  const handleOpen = () => setOpen(!open);
-
-  const handleSubscribe = () => {
-    if (validate()) {
-      setOpen(false);
-
-      subscribeToArbitrage(Number(minProfit), Number(volume), crypto, fiat)
-        .then(() => {
-          setSubscribed(true);
-          notify('Success.');
-        })
-        .catch(() => notify(String('Ha ocurrido un error.'), true));
-
-      console.log(`${minProfit} ${volume} ${crypto} ${fiat}`);
     }
   };
 
@@ -118,36 +116,50 @@ export default function NotificationButton() {
       <div className='flex flex-row gap-2'>
         <button
           className='group flex relative text-base'
-          onClick={showNotification}
+          onClick={handleAddNotification}
         >
-          {!subscribed ? (
-            <MdiBellRing className={`text-default hover:text-lime-200`} />
-          ) : (
-            <MdiBellMinus />
-          )}
+          <MdiBellPlus className={'text-default hover:text-lime-200'} />
           <span
             className='group-hover:opacity-100 transition-opacity bg-[--color-surface-offset] px-2 text-sm text-gray-100 rounded-md absolute left-1/2
     -translate-x-1/2 translate-y-2 opacity-0 m-4 mx-auto top-0 whitespace-nowrap'
           >
-            {subscribed ? 'Eliminar notificaciones' : 'Activar notificaciones'}
+            Nueva notificación
           </span>
         </button>
 
         {subscribed && (
           <button
             className='group flex relative text-base'
-            onClick={handleAddNotification}
+            onClick={handleRemoveNotifications}
           >
-            <MdiBellPlus className={'text-default hover:text-lime-200'} />
+            <MdiBellMinus />
             <span
               className='group-hover:opacity-100 transition-opacity bg-[--color-surface-offset] px-2 text-sm text-gray-100 rounded-md absolute left-1/2
     -translate-x-1/2 translate-y-2 opacity-0 m-4 mx-auto top-0 whitespace-nowrap'
             >
-              Nueva notificación
+              Eliminar notificaciones
             </span>
           </button>
         )}
       </div>
+
+      <Dialog
+        size='xs'
+        open={openDeniedPermissionDialog}
+        handler={() =>
+          setOpenDeniedPermissionDialog(!openDeniedPermissionDialog)
+        }
+        className='bg-transparent'
+      >
+        <Card className='bg-surfaceOffset'>
+          <CardBody className='flex flex-col gap-2 items-center'>
+            <MdOutlineWarning size={32} className='text-yellow-500' />
+            <Typography variant='small' className='text-default'>
+              Tienes que conceder permisos para poder recibir notificaciones.
+            </Typography>
+          </CardBody>
+        </Card>
+      </Dialog>
 
       <Dialog
         size='xs'
