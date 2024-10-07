@@ -1,6 +1,8 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
-module.exports = {
+import withMT from "@material-tailwind/react/utils/withMT"
+
+export default withMT({
   content: ["./src/**/*.{astro,html,js,jsx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
@@ -19,6 +21,7 @@ module.exports = {
         default: "var(--color-background)",
         offset: "var(--color-background-offset)",
         surface: "var(--color-surface)",
+        surfaceOffset: "var(--color-surface-offset)",
         onSurface: "var(--color-surface-offset)"
       },
       borderColor: {
@@ -30,4 +33,4 @@ module.exports = {
     fontSize: false,
   },
   plugins: [require("tailwindcss-fluid-type")],
-};
+})

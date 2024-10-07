@@ -11,13 +11,13 @@
 
 [data-theme='dark'] {
   color-scheme: dark;
-  --color-primary: theme('colors.lime.300');
-  --color-secondary: theme('colors.cyan.400');
-  --color-text: theme('colors.gray.50');
-  --color-text-offset: theme('colors.gray.400');
-  --color-background: theme('colors.zinc.950');
-  --color-background-offset: theme('colors.zinc.900');
-  --color-surface: theme('colors.zinc.800');
-  --color-surface-offset: theme('colors.zinc.700');
-  --color-border: theme('colors.zinc.600' / 10%);
+  --color-primary: #bef264;
+  --color-secondary: #22d3ee;
+  --color-text: #f9fafb;
+  --color-text-offset: #9ca3af;
+  --color-background: #09090b;
+  --color-background-offset: #18181b;
+  --color-surface: #27272a;
+  --color-surface-offset: #3f3f46;
+  --color-border: #52525b / 10%;
 }
