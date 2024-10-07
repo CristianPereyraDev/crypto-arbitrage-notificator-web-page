@@ -87,7 +87,11 @@ export default function NotificationButtons() {
   };
 
   const handleAddNotification = () => {
-    setOpen(true);
+    if ('Notification' in window && Notification.permission !== 'granted') {
+      setOpenDeniedPermissionDialog(true);
+    } else {
+      setOpen(true);
+    }
   };
 
   const handleMinProfit = (e: React.ChangeEvent<HTMLInputElement>) => {
