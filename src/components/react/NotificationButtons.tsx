@@ -26,7 +26,7 @@ export default function NotificationButtons() {
   const [openDeniedPermissionDialog, setOpenDeniedPermissionDialog] =
     useState(false);
   const [subscribed, setSubscribed] = useState(false);
-  const [minProfit, setMinProfit] = useState<string | undefined>('0.8');
+  const [minProfit, setMinProfit] = useState<number | undefined>(0.8);
   const [volume, setVolume] = useState<string | undefined>('1.0');
   const [crypto, setCrypto] = useState<string | undefined>('USDT');
   const [fiat, setFiat] = useState<string | undefined>('ARS');
@@ -94,8 +94,7 @@ export default function NotificationButtons() {
     }
   };
 
-  const handleMinProfit = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+  const handleMinProfitChange = (value: number) => {
     setMinProfit(value);
   };
 
@@ -189,10 +188,7 @@ export default function NotificationButtons() {
               </Typography>
               <ProfitSlider
                 defaultValue={0.8}
-                min={0.2}
-                max={10}
-                step={0.1}
-                onChange={handleMinProfit}
+                onChange={handleMinProfitChange}
               />
             </div>
 
