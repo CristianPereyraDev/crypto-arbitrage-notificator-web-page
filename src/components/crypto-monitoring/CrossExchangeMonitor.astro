@@ -1,7 +1,9 @@
 ---
-import SymbolMonitor from "./SymbolMonitor.astro";
-import type { ICryptoPair } from "../../types";
-import ConfigurationBar from "../ConfigurationBar.astro";
+import { Icon } from 'astro-icon/components';
+
+import SymbolMonitor from './SymbolMonitor.astro';
+import type { ICryptoPair } from '../../types';
+import ConfigurationBar from '../ConfigurationBar.astro';
 
 interface Props {
   pairs: Array<ICryptoPair>;
@@ -10,30 +12,30 @@ interface Props {
 const { pairs } = Astro.props;
 ---
 
-<div id="container" class="bg-surface px-1 py-2 md:py-0 md:rounded">
-  <div class="justify-self-center">
+<div id='container' class='bg-surface px-1 py-2 md:rounded md:py-0 relative'>
+  <div class='justify-self-center'>
     <ConfigurationBar />
   </div>
-  <div class="tabs px-1">
+  <div class='tabs px-1'>
     {
       pairs.map((pair, index) => (
-        <div class="relative">
+        <div class='relative'>
           <button
-            class="tab px-2 py-1 font-semibold text-xs bg-onSurface rounded-t shadow-sm transition-transform"
+            class='tab rounded-t bg-onSurface px-2 py-1 font-semibold shadow-sm transition-transform text-xs'
             data-content-id={`content-${pair.crypto}-${pair.fiat}`}
           >
             {pair.crypto}-{pair.fiat}
           </button>
-          <div class="absolute bottom-[-1px] h-1 w-full shadow-[0_0_2px_2px_rgba(0,0,0,0.3)]" />
+          <div class='absolute bottom-[-1px] h-1 w-full shadow-[0_0_2px_2px_rgba(0,0,0,0.3)]' />
         </div>
       ))
     }
   </div>
-  <section class="content ws-content relative bg-surface min-h-0 -mt-1 pb-1">
+  <section class='content ws-content relative -mt-1 min-h-0 bg-surface pb-1'>
     {
       pairs.map((pair, index) => (
         <div
-          class={`item ${index === 0 ? "selected" : ""}`}
+          class={`item ${index === 0 ? 'selected' : ''}`}
           id={`content-${pair.crypto}-${pair.fiat}`}
         >
           <SymbolMonitor symbol={pair} />
@@ -44,45 +46,45 @@ const { pairs } = Astro.props;
 </div>
 
 <script>
-  document.body.addEventListener("htmx:wsConfigSend", ((event: CustomEvent) => {
-    if (Object.hasOwn(event.detail.parameters, "crypto")) {
+  document.body.addEventListener('htmx:wsConfigSend', ((event: CustomEvent) => {
+    if (Object.hasOwn(event.detail.parameters, 'crypto')) {
       const { asset, fiat }: { asset: string; fiat: string } =
         event.detail.parameters.crypto;
 
       const volumeInputElem = document.getElementById(
-        `input-volume-${asset}-${fiat}`,
+        `input-volume-${asset}-${fiat}`
       ) as HTMLInputElement;
 
-      event.detail.parameters.crypto["volume"] = volumeInputElem
+      event.detail.parameters.crypto['volume'] = volumeInputElem
         ? volumeInputElem.value
-        : "1";
+        : '1';
     }
   }) as EventListener);
 
   // Tabs
-  let container = document.getElementById("container");
-  let tabSelected = document.querySelector("#container .tabs .tab");
+  let container = document.getElementById('container');
+  let tabSelected = document.querySelector('#container .tabs .tab');
   let tabSelectedContent = document.getElementById(
-    tabSelected?.getAttribute("data-content-id") || "",
+    tabSelected?.getAttribute('data-content-id') || ''
   );
 
-  tabSelected?.classList.add("selected");
-  tabSelectedContent?.classList.add("selected");
+  tabSelected?.classList.add('selected');
+  tabSelectedContent?.classList.add('selected');
 
-  container?.addEventListener("click", (event) => {
+  container?.addEventListener('click', (event) => {
     const target = event.target as Element;
-    if (target && target.classList.contains("tab")) {
-      tabSelected?.classList.remove("selected");
-      tabSelectedContent?.classList.remove("selected");
+    if (target && target.classList.contains('tab')) {
+      tabSelected?.classList.remove('selected');
+      tabSelectedContent?.classList.remove('selected');
 
       tabSelected = target;
-      tabSelected.classList.add("selected");
+      tabSelected.classList.add('selected');
 
-      const tabContentId = tabSelected?.getAttribute("data-content-id");
+      const tabContentId = tabSelected?.getAttribute('data-content-id');
 
       if (tabContentId) {
         tabSelectedContent = document.getElementById(tabContentId);
-        tabSelectedContent?.classList.add("selected");
+        tabSelectedContent?.classList.add('selected');
       }
     }
   });
@@ -101,13 +103,12 @@ const { pairs } = Astro.props;
     gap: 0.8rem;
   }
 
-  button.tab.selected {    
+  button.tab.selected {
     color: var(--color-primary);
     transform: translateY(-2px);
   }
 
   button.tab.selected + div {
-    
   }
 
   .content .item {

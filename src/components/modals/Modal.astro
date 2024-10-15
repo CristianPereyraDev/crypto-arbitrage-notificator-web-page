@@ -1,31 +1,31 @@
 ---
-const { id, openText } = Astro.props;
+const { id, openText } = Astro.props
 ---
 
 <button
-  onclick={`window.${id}.showModal()`}
-  class:list={[
-    "flex items-center gap-1",
-    "rounded bg-teal-600 px-4 py-1 shadow hover:bg-teal-500 hover:text-current",
-  ]}
+	onclick={`window.${id}.showModal()`}
+	class:list={[
+		'flex items-center gap-1',
+		'rounded bg-teal-600 px-4 py-1 shadow hover:bg-teal-500 hover:text-current'
+	]}
 >
-  <span>{openText}</span>
-  <slot name="button-icon" />
+	<span>{openText}</span>
+	<slot name="button-icon" />
 </button>
 
 <dialog id={id}>
-  <div class="p-4">
-    <slot name="main" />
-    <form method="dialog" class="mt-4">
-      <slot name="close" />
-    </form>
-  </div>
+	<div class="p-4">
+		<slot name="main" />
+		<form method="dialog" class="mt-4">
+			<slot name="close" />
+		</form>
+	</div>
 </dialog>
 
 <style lang="scss">
-  dialog {
-    &::backdrop {
-      background: rgba(0, 0, 0, 0.3);
-    }
-  }
+	dialog {
+		&::backdrop {
+			background: rgba(0, 0, 0, 0.3);
+		}
+	}
 </style>

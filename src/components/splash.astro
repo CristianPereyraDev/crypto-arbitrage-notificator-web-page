@@ -1,46 +1,44 @@
 ---
-import HeroImage from "../components/hero-image.astro";
-import Starfield from "../components/starfield.astro";
+import HeroImage from '../components/hero-image.astro'
+import Starfield from '../components/starfield.astro'
 
-import appScreenshot from "../assets/app_screenshot.png";
-import AppDescriptionText from "./app-description-text.astro";
+import appScreenshot from '../assets/app_screenshot.png'
+import AppDescriptionText from './app-description-text.astro'
 ---
 
 <section class="relative h-full overflow-hidden bg-black">
-  <Starfield />
-  <div id="splash-bg-fallback" class="absolute inset-0 hidden opacity-40">
-    <HeroImage />
-  </div>
-  <div class="relative grid h-full place-items-center lg:grid-cols-2">
-    <h2
-      class="hidden items-center gap-2 self-center px-4 sm:gap-4 md:flex-col lg:flex"
-    >
-      <AppDescriptionText />
-    </h2>
+	<Starfield />
+	<div id="splash-bg-fallback" class="absolute inset-0 hidden opacity-40">
+		<HeroImage />
+	</div>
+	<div class="relative grid h-full place-items-center lg:grid-cols-2">
+		<h2 class="hidden items-center gap-2 self-center px-4 sm:gap-4 md:flex-col lg:flex">
+			<AppDescriptionText />
+		</h2>
 
-    <div
-      id="video-presentation"
-      class="grid h-full h-screen w-full items-center justify-center self-auto justify-self-center px-1"
-    >
-      <video
-        style="height: 92vh;"
-        width="auto"
-        autoplay
-        muted
-        playsinline
-        loop  
-        poster="https://res.cloudinary.com/drwmwymbb/image/upload/v1724374735/Projects/CryptoARbitrage/images/crypoarbitrage_app_presentation_poster.png"
-      >
-        <source src="/videos/presentation_2.mp4" type="video/mp4" />
-      </video>
-    </div>
-  </div>
+		<div
+			id="video-presentation"
+			class="grid h-full h-screen w-full items-center justify-center self-auto justify-self-center px-1"
+		>
+			<video
+				style="height: 92vh;"
+				width="auto"
+				autoplay
+				muted
+				playsinline
+				loop
+				poster="https://res.cloudinary.com/drwmwymbb/image/upload/v1724374735/Projects/CryptoARbitrage/images/crypoarbitrage_app_presentation_poster.png"
+			>
+				<source src="/videos/presentation_2.mp4" type="video/mp4" />
+			</video>
+		</div>
+	</div>
 </section>
 
 <noscript>
-  <style>
-    #splash-bg-fallback {
-      display: block;
-    }
-  </style>
+	<style>
+		#splash-bg-fallback {
+			display: block;
+		}
+	</style>
 </noscript>

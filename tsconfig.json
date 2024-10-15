@@ -1,17 +1,12 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "compilerOptions": {
-    "baseUrl": "/home/cristian/SoftDev/ReactProyects/Astro Projects/crypto-arbitrage-notificator-web-page",
-    "paths": {
-      "~/*": [
-        "src/*"
-      ]
-    },
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "lib": [
-      "ESNext",
-      "WebWorker"
-    ]
-  }
+	"extends": "astro/tsconfigs/strict",
+	"compilerOptions": {
+		"baseUrl": "/home/cristian/SoftDev/ReactProyects/Astro Projects/crypto-arbitrage-notificator-web-page",
+		"paths": {
+			"~/*": ["src/*"]
+		},
+		"jsx": "react-jsx",
+		"jsxImportSource": "react",
+		"lib": ["ESNext", "WebWorker"]
+	}
 }

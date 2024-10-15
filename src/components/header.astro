@@ -1,60 +1,60 @@
 ---
-import type { INavItem } from "../types";
+import type { INavItem } from '../types'
 
 const navItems: Array<INavItem> = [
-  // {
-  //   title: "Descarga",
-  //   url: "https://drive.google.com/file/d/12Xz4EgnNKDG3Rj6s15awxXnOyCMRoTE-/view?usp=sharing",
-  // },
-  {
-    title: "Proximamente para descargar...",
-    url: "#",
-  },
-];
+	// {
+	//   title: "Descarga",
+	//   url: "https://drive.google.com/file/d/12Xz4EgnNKDG3Rj6s15awxXnOyCMRoTE-/view?usp=sharing",
+	// },
+	{
+		title: 'Proximamente para descargar...',
+		url: '#'
+	}
+]
 ---
 
 <header
-  id="page-header"
-  class="flex w-full flex-col items-center justify-between gap-12 border-b border-transparent px-8 py-4 text-white lg:absolute lg:bottom-0 lg:top-auto lg:z-20 lg:w-3/5 lg:flex-row lg:bg-transparent"
+	id="page-header"
+	class="flex w-full flex-col items-center justify-between gap-12 border-b border-transparent px-8 py-4 text-white lg:absolute lg:bottom-0 lg:top-auto lg:z-20 lg:w-3/5 lg:flex-row lg:bg-transparent"
 >
-  <div class="flex flex-col items-center gap-6 lg:flex-row">
-    <nav class="block">
-      <ul class="flex flex-col items-center gap-6">
-        {
-          navItems.map(({ title, url }) => (
-            <li>
-              <a class="text-md font-semibold" href={url} target="_blank">
-                {title}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
-    <a href="https://www.buymeacoffee.com/cristianpereyradev" target="_blank"
-      ><img
-        src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-        alt="Buy Me A Coffee"
-        style="height: 60px !important;width: 217px !important;"
-      /></a
-    >
-  </div>
+	<div class="flex flex-col items-center gap-6 lg:flex-row">
+		<nav class="block">
+			<ul class="flex flex-col items-center gap-6">
+				{
+					navItems.map(({ title, url }) => (
+						<li>
+							<a class="text-md font-semibold" href={url} target="_blank">
+								{title}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+		<a href="https://www.buymeacoffee.com/cristianpereyradev" target="_blank"
+			><img
+				src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+				alt="Buy Me A Coffee"
+				style="height: 60px !important;width: 217px !important;"
+			/></a
+		>
+	</div>
 </header>
 
 <noscript>
-  <style>
-    #open-nav-button {
-      display: none;
-    }
-  </style>
+	<style>
+		#open-nav-button {
+			display: none;
+		}
+	</style>
 </noscript>
 
 <style>
-  .fixed-header {
-    @apply fixed bottom-auto top-0;
-    @apply border-default bg-default text-default;
-  }
-  .modal.is-open {
-    @apply block;
-  }
+	.fixed-header {
+		@apply fixed bottom-auto top-0;
+		@apply border-default bg-default text-default;
+	}
+	.modal.is-open {
+		@apply block;
+	}
 </style>

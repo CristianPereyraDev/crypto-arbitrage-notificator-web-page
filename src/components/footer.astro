@@ -1,72 +1,69 @@
 ---
-import { Icon } from "astro-icon/components";
-import type { IFooterLink } from "../types";
+import { Icon } from 'astro-icon/components'
+import type { IFooterLink } from '../types'
 
 interface Props {
-  navLinks: Array<IFooterLink>;
+	navLinks: Array<IFooterLink>
 }
 
-const { navLinks = [] } = Astro.props;
+const { navLinks = [] } = Astro.props
 
 const links: Array<IFooterLink> = [
-  {
-    url: "https://cristianpereyradev.github.io/",
-    description: "Cristian Pereyra, Full Stack Developer",
-    icon: "cristian-pereyra-dev-logo",
-  },
-  {
-    url: "mailto:cristian.pereyra.dev@gmail.com",
-    description: "Mi perfil de Linkedin",
-    icon: "mdi:mail-outline",
-  },
-  {
-    url: "https://github.com/CristianPereyraDev/",
-    description: "Mi perfil de GitHub",
-    icon: "fa-brands:github-alt",
-  },
-  {
-    url: "https://www.linkedin.com/in/cristian-pereyra-dev/",
-    description: "Mi perfil de Linkedin",
-    icon: "mdi:linkedin",
-  },
-];
+	{
+		url: 'https://cristianpereyradev.github.io/',
+		description: 'Cristian Pereyra, Full Stack Developer',
+		icon: 'cristian-pereyra-dev-logo'
+	},
+	{
+		url: 'mailto:cristian.pereyra.dev@gmail.com',
+		description: 'Mi perfil de Linkedin',
+		icon: 'mdi:mail-outline'
+	},
+	{
+		url: 'https://github.com/CristianPereyraDev/',
+		description: 'Mi perfil de GitHub',
+		icon: 'fa-brands:github-alt'
+	},
+	{
+		url: 'https://www.linkedin.com/in/cristian-pereyra-dev/',
+		description: 'Mi perfil de Linkedin',
+		icon: 'mdi:linkedin'
+	}
+]
 ---
 
 <div
-  class="grid h-full grid-cols-1 grid-rows-2 justify-center justify-items-center gap-2 sm:grid-cols-2 sm:grid-rows-1"
+	class="grid h-full grid-cols-1 grid-rows-2 justify-center justify-items-center gap-2 sm:grid-cols-2 sm:grid-rows-1"
 >
-  <ul class="flex h-full gap-4 sm:place-self-start">
-    {
-      navLinks.map((link) => (
-        <li class="h-full grow">
-          <a
-            class="flex h-full items-center rounded bg-surface px-4 py-1 hover:text-[--color-primary]"
-            href={link.url}
-            target="_blank"
-          >
-            <span class="font-bold text-sm">{link.description}</span>
-            <span>
-              <Icon
-                class="text-green-500 text-lg lg:text-xl"
-                name={link.icon}
-              />
-            </span>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+	<ul class="flex h-full gap-4 sm:place-self-start">
+		{
+			navLinks.map((link) => (
+				<li class="h-full grow">
+					<a
+						class="flex h-full items-center rounded bg-surface px-4 py-1 hover:text-[--color-primary]"
+						href={link.url}
+						target="_blank"
+					>
+						<span class="font-bold text-sm">{link.description}</span>
+						<span>
+							<Icon class="text-green-500 text-lg lg:text-xl" name={link.icon} />
+						</span>
+					</a>
+				</li>
+			))
+		}
+	</ul>
 
-  <ul class="flex h-full gap-4 sm:place-self-end">
-    {
-      links.map((link) => (
-        <li class="grow">
-          <a class="flex h-full items-center" href={link.url} target="_blank">
-            <span class="sr-only">{link.description}</span>
-            <Icon class="text-lg lg:text-2xl" name={link.icon} />
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+	<ul class="flex h-full gap-4 sm:place-self-end">
+		{
+			links.map((link) => (
+				<li class="grow">
+					<a class="flex h-full items-center" href={link.url} target="_blank">
+						<span class="sr-only">{link.description}</span>
+						<Icon class="text-lg lg:text-2xl" name={link.icon} />
+					</a>
+				</li>
+			))
+		}
+	</ul>
 </div>

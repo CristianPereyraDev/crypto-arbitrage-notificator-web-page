@@ -1,19 +1,20 @@
 ---
 import { pwaInfo } from 'virtual:pwa-info';
 
-import "../styles/price_monitoring_layout.css";
+import '../styles/price_monitoring_layout.css';
 
-import "@fontsource-variable/inter";
-import { Icon } from "astro-icon/components";
+import '@fontsource-variable/inter';
+import { Icon } from 'astro-icon/components';
 
-import Footer from "../components/footer.astro";
-import CurrencyRates from "../components/preact/CurrencyRates"
+import Footer from '../components/footer.astro';
+import CurrencyRates from '../components/preact/CurrencyRates';
 
 const { generator, site } = Astro;
-const image = new URL("prices_page.png", site);
-const description = "Consulta precios crypto.";
-const cryptoArbitrageWebsocketURL = import.meta.env.PUBLIC_CRYPTO_ARBITRAGE_WEBSOCKET_URL;
-let token = "";
+const image = new URL('prices_page.png', site);
+const description = 'Consulta precios crypto.';
+const cryptoArbitrageWebsocketURL = import.meta.env
+  .PUBLIC_CRYPTO_ARBITRAGE_WEBSOCKET_URL;
+let token = '';
 
 try {
   const response = await fetch(`${Astro.url}/token.json`);
@@ -27,78 +28,78 @@ try {
 ---
 
 <!doctype html>
-<html lang="en" class="h-full motion-safe:scroll-smooth" data-theme="dark">
+<html lang='en' class='h-full motion-safe:scroll-smooth' data-theme='dark'>
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="generator" content={generator} />
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width' />
+    <link rel='icon' href='/favicon.svg' type='image/svg+xml' />
+    <meta name='generator' content={generator} />
 
     <title>Crypto Prices</title>
-    <meta name="description" content={description} />
+    <meta name='description' content={description} />
 
     <!-- social media -->
-    <meta property="og:title" content="Crypto Prices" />
-    <meta property="og:type" content="website" />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
-    <meta property="og:url" content={site} />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta property='og:title' content='Crypto Prices' />
+    <meta property='og:type' content='website' />
+    <meta property='og:description' content={description} />
+    <meta property='og:image' content={image} />
+    <meta property='og:url' content={site} />
+    <meta name='twitter:card' content='summary_large_image' />
 
     <!-- initialize theme -->
     <script is:inline>
-      document.documentElement.dataset.theme = "dark";
+      document.documentElement.dataset.theme = 'dark';
     </script>
 
     <script
       defer
-      src="https://unpkg.com/htmx.org@1.9.6"
-      integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
-      crossorigin="anonymous"></script>
-    <script defer src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
+      src='https://unpkg.com/htmx.org@1.9.6'
+      integrity='sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni'
+      crossorigin='anonymous'></script>
+    <script defer src='https://unpkg.com/htmx.org/dist/ext/ws.js'></script>
 
-    { pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
-    <script src="/src/pwa/pwa.ts"></script>
+    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
+    <script src='/src/pwa/pwa.ts'></script>
   </head>
-  <body class="overflow-x-hidden bg-default text-default">
+  <body class='overflow-x-hidden bg-default text-default'>
     <div
-      id="price-monitoring-app"
-      hx-ext="ws"
+      id='price-monitoring-app'
+      hx-ext='ws'
       ws-connect={`${cryptoArbitrageWebsocketURL}/websocket/web?at=${token}`}
     >
-      <header class="grid auto-rows-min w-full justify-items-center">     
-        <div class="header-content flex items-center justify-center h-0 transition-all md:px-2 md:py-2 md:h-full">
-          <Icon name="mdi:currency-usd" size={50} class="text-[--color-primary] hidden lg:block" />
+      <header class='grid w-full auto-rows-min justify-items-center'>
+        <div
+          class='header-content flex h-0 items-center justify-center transition-all md:h-full md:px-2 md:py-2'
+        >
+          <Icon
+            name='mdi:currency-usd'
+            size={50}
+            class='hidden text-[--color-primary] lg:block'
+          />
           <CurrencyRates client:visible />
         </div>
-        <button class="flex justify-center items-center bg-onSurface w-full md:hidden">
-          <span class="text-xs text-[--color-primary]">Dollar</span>
-          <Icon class="text-offset" name="mdi:chevron-down" />
-          <Icon class="text-offset" name="mdi:chevron-up" />
+        <button
+          class='flex w-full items-center justify-center bg-onSurface md:hidden'
+        >
+          <span class='text-[--color-primary] text-xs'>Dollar</span>
+          <Icon class='text-offset' name='mdi:chevron-down' />
+          <Icon class='text-offset' name='mdi:chevron-up' />
         </button>
       </header>
-      <main class="h-full md:py-2 lg:px-2">
+      <main class='h-full md:py-2 lg:px-2'>
         <slot />
       </main>
-      <footer class="px-2 py-2 border-t border-default">
+      <footer class='border-t border-default px-2 py-2'>
         <Footer
           navLinks={[
             {
-              url: "/native-app",
-              description: "CryptoARbitrage App",
-              icon: "mdi:adb",
+              url: '/native-app',
+              description: 'CryptoARbitrage App',
+              icon: 'mdi:adb',
             },
           ]}
         />
       </footer>
-      <div
-        id="app-loading-indicator"
-        class="absolute z-50 grid h-full w-full content-center justify-center bg-slate-800"
-      >
-        <div>
-          <Icon name="cryptoarbitrage-logo" size={100} class="app-icon" />
-        </div>
-      </div>
     </div>
   </body>
 </html>
@@ -127,10 +128,10 @@ try {
 </style>
 
 <script>
-  const headerContentElem = document.querySelector(".header-content");
-  const expandButtonElem = document.querySelector(".header-content + button");
+  const headerContentElem = document.querySelector('.header-content');
+  const expandButtonElem = document.querySelector('.header-content + button');
 
-  expandButtonElem?.addEventListener("click", () => {
-    headerContentElem?.classList.toggle("expanded");
+  expandButtonElem?.addEventListener('click', () => {
+    headerContentElem?.classList.toggle('expanded');
   });
 </script>

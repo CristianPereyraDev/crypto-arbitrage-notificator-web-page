@@ -1,23 +1,23 @@
 [data-theme='light'] {
-  color-scheme: light;
-  --color-primary: theme('colors.pink.500');
-  --color-secondary: theme('colors.indigo.500');
-  --color-text: theme('colors.gray.900');
-  --color-text-offset: theme('colors.gray.600');
-  --color-background: theme('colors.gray.50');
-  --color-background-offset: theme('colors.gray.100');
-  --color-border: theme('colors.gray.900' / 10%);
+	color-scheme: light;
+	--color-primary: theme('colors.pink.500');
+	--color-secondary: theme('colors.indigo.500');
+	--color-text: theme('colors.gray.900');
+	--color-text-offset: theme('colors.gray.600');
+	--color-background: theme('colors.gray.50');
+	--color-background-offset: theme('colors.gray.100');
+	--color-border: theme('colors.gray.900' / 10%);
 }
 
 [data-theme='dark'] {
-  color-scheme: dark;
-  --color-primary: #bef264;
-  --color-secondary: #22d3ee;
-  --color-text: #f9fafb;
-  --color-text-offset: #9ca3af;
-  --color-background: #09090b;
-  --color-background-offset: #18181b;
-  --color-surface: #27272a;
-  --color-surface-offset: #3f3f46;
-  --color-border: #52525b / 10%;
+	color-scheme: dark;
+	--color-primary: #bef264;
+	--color-secondary: #22d3ee;
+	--color-text: #f9fafb;
+	--color-text-offset: #9ca3af;
+	--color-background: #09090b;
+	--color-background-offset: #18181b;
+	--color-surface: #27272a;
+	--color-surface-offset: #3f3f46;
+	--color-border: #52525b / 10%;
 }

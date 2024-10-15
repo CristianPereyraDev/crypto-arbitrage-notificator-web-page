@@ -1,11 +1,11 @@
 ---
 export const prerender = false;
 
-import PriceMonitoringLayout from "../layouts/PriceMonitoringLayout.astro";
-import CrossExchangeMonitor from "../components/crypto-monitoring/CrossExchangeMonitor.astro";
+import PriceMonitoringLayout from '../layouts/PriceMonitoringLayout.astro';
+import CrossExchangeMonitor from '../components/crypto-monitoring/CrossExchangeMonitor.astro';
 
 let availablePairs: { crypto: string; fiat: string }[] = [];
-const cryptoArbitrageAPIURL = import.meta.env.PUBLIC_CRYPTO_ARBITRAGE_API_URL
+const cryptoArbitrageAPIURL = import.meta.env.PUBLIC_CRYPTO_ARBITRAGE_API_URL;
 
 try {
   const response = await fetch(`${cryptoArbitrageAPIURL}/api/pairs_available`);
@@ -14,7 +14,7 @@ try {
     const data: string[] = (await response.json()).data;
 
     availablePairs = data.map((symbol) => {
-      return { crypto: symbol.split("-")[0], fiat: symbol.split("-")[1] };
+      return { crypto: symbol.split('-')[0], fiat: symbol.split('-')[1] };
     });
   }
 } catch (error) {
@@ -23,17 +23,15 @@ try {
 ---
 
 <PriceMonitoringLayout>
-  <!-- Websocket setup --> 
-  <CrossExchangeMonitor pairs={availablePairs} />  
+  <!-- Websocket setup -->
+  <CrossExchangeMonitor pairs={availablePairs} />
 </PriceMonitoringLayout>
 
 <script>
-  document.body.addEventListener("htmx:wsAfterMessage", ((
-    event: CustomEvent,
+  document.body.addEventListener('htmx:wsAfterMessage', ((
+    event: CustomEvent
   ) => {
-    const appLoadingElem = document.querySelector(
-      "#app-loading-indicator",
-    ) as HTMLElement;
-    appLoadingElem.style.display = "none";
+    // const appLoadingElem = document.querySelector('#app-loading-indicator') as HTMLElement
+    // appLoadingElem.style.display = 'none'
   }) as EventListener);
 </script>
