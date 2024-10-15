@@ -1,6 +1,6 @@
 # CryptoARbitrage (PWA version)
 
-![cryptoarbitrage_pwa_screenshot](cryptoarbitrage_pwa_screenshot.png)
+![cryptoarbitrage_pwa_screenshot](images/cryptoarbitrage_pwa_screenshot.png)
 
 ## Features
 
