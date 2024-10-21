@@ -1,9 +1,6 @@
 ---
-import { Icon } from 'astro-icon/components';
-
 import SymbolMonitor from './SymbolMonitor.astro';
 import type { ICryptoPair } from '../../types';
-import ConfigurationBar from '../ConfigurationBar.astro';
 
 interface Props {
   pairs: Array<ICryptoPair>;
@@ -12,10 +9,7 @@ interface Props {
 const { pairs } = Astro.props;
 ---
 
-<div id='container' class='bg-surface px-1 py-2 md:rounded md:py-0 relative'>
-  <div class='justify-self-center'>
-    <ConfigurationBar />
-  </div>
+<div id='container' class='bg-surface px-1 py-2 md:rounded relative'>
   <div class='tabs px-1'>
     {
       pairs.map((pair, index) => (
@@ -46,21 +40,6 @@ const { pairs } = Astro.props;
 </div>
 
 <script>
-  document.body.addEventListener('htmx:wsConfigSend', ((event: CustomEvent) => {
-    if (Object.hasOwn(event.detail.parameters, 'crypto')) {
-      const { asset, fiat }: { asset: string; fiat: string } =
-        event.detail.parameters.crypto;
-
-      const volumeInputElem = document.getElementById(
-        `input-volume-${asset}-${fiat}`
-      ) as HTMLInputElement;
-
-      event.detail.parameters.crypto['volume'] = volumeInputElem
-        ? volumeInputElem.value
-        : '1';
-    }
-  }) as EventListener);
-
   // Tabs
   let container = document.getElementById('container');
   let tabSelected = document.querySelector('#container .tabs .tab');
@@ -95,7 +74,7 @@ const { pairs } = Astro.props;
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto 1fr;
   }
 
   .tabs {

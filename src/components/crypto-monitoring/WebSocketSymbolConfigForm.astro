@@ -1,0 +1,104 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { ICryptoPair } from '../../types';
+
+interface Props {
+  symbol: ICryptoPair;
+  defaultVolume?: number;
+}
+
+const { symbol, defaultVolume = 1 } = Astro.props;
+---
+
+<style is:global>
+  form input[type='number'],
+  input[type='text'] {
+    height: 1.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-radius: 0.375rem;
+    max-width: 8rem;
+  }
+
+  .htmx-indicator {
+    transition: opacity ease-in 500ms;
+  }
+
+  form.htmx-ws-request .htmx-indicator {
+    opacity: 1;
+  }
+  input:invalid {
+    border: 1px solid red;
+  }
+</style>
+
+<form
+  id={`form-${symbol.crypto}-${symbol.fiat}`}
+  ws-send
+  hx-trigger=`load, input changed delay:1000ms, change from:(#form-${symbol.crypto}-${symbol.fiat} .on-change-input-container)`
+  hx-swap='innerHTML settle:1s'
+  hx-vals={`{"crypto": { "asset": "${symbol.crypto}", "fiat": "${symbol.fiat}" }}`}
+>
+  <div class='flex flex-row items-center gap-3'>
+    <label class='on-change-input-container flex gap-1 font-semibold'>
+      <span class='justify-self-center text-xs'>Incluir comisiones:</span>
+      <input
+        id=`input-include-fees-${symbol.crypto}-${symbol.fiat}`
+        name='includeFees'
+        type='checkbox'
+      />
+    </label>
+    <label class='items-center font-semibold'>
+      <span class='text-xs'
+        >Volumen(<span class='text-secondary font-light'>{symbol.crypto}</span
+        >):</span
+      >
+      <input
+        type='text'
+        id=`input-volume-${symbol.crypto}-${symbol.fiat}`
+        name='volume'
+        value={defaultVolume}
+      />
+    </label>
+    <Icon
+      class='htmx-indicator ml-1 text-lg text-primary'
+      name='svg-spinners:180-ring-with-bg'
+    />
+  </div>
+</form>
+
+<script>
+  document.body.addEventListener('htmx:wsConfigSend', ((event: CustomEvent) => {
+    if (Object.hasOwn(event.detail.parameters, 'crypto')) {
+      const { asset, fiat } = event.detail.parameters.crypto;
+
+      const finalParams = Object.create(null);
+      finalParams['asset'] = asset;
+      finalParams['fiat'] = fiat;
+
+      for (const param in event.detail.parameters) {
+        if (param !== 'crypto') {
+          if (param === 'volume') {
+            finalParams[param] =
+              event.detail.parameters[param] === ''
+                ? '1'
+                : event.detail.parameters[param];
+          } else {
+            finalParams[param] = event.detail.parameters[param];
+          }
+        }
+      }
+
+      event.detail.parameters = { crypto: finalParams };
+    }
+  }) as EventListener);
+
+  document.body.addEventListener('htmx:wsAfterSend', ((event: CustomEvent) => {
+    const elt = event.detail.elt as HTMLElement;
+
+    elt.removeAttribute('classes');
+    elt.classList.add('htmx-ws-request');
+  }) as EventListener);
+</script>

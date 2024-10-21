@@ -1,33 +1,30 @@
 ---
 import { Icon } from 'astro-icon/components';
 import type { ICryptoPair } from '../../types';
+import NotificationSetup from '../react/NotificationButtons';
+import WebSocketSymbolConfigForm from './WebSocketSymbolConfigForm.astro';
 
 interface Props {
   symbol: ICryptoPair;
 }
 
 const { symbol } = Astro.props;
+
+const defaultVolumes: any = { stablecoins: 500, BTC: 0.01, ETH: 0.2 };
 ---
 
 <>
   <div class='z-10'>
-    <section class='col-span-full px-2 py-2'>
-      <div
-        class='grid grid-flow-col gap-1'
-        ws-send=''
-        hx-swap='innerHTML settle:1s'
-        hx-trigger='load, keyup delay:1s'
-        hx-vals={`{"crypto": { "asset": "${symbol.crypto}", "fiat": "${symbol.fiat}" }}`}
-      >
-        <label>
-          Volumen <span class='hidden text-xs'>({symbol.crypto})</span> =
-          <input
-            id=`input-volume-${symbol.crypto}-${symbol.fiat}`
-            type='number'
-            value='1'
-            class='h-6 rounded-md border border-default px-2 py-1 text-xs'
-          />
-        </label>
+    <section class='flex flex-row gap-2 px-2 py-2'>
+      <div class='z-50'>
+        <NotificationSetup client:only='react' symbol={symbol} />
+      </div>
+      <div class='flex flex-row gap-2'>
+        <WebSocketSymbolConfigForm
+          symbol={symbol}
+          defaultVolume={defaultVolumes[symbol.crypto] ||
+            defaultVolumes.stablecoins}
+        />
       </div>
     </section>
   </div>
@@ -50,7 +47,7 @@ const { symbol } = Astro.props;
     </div>
     <div
       id={`${symbol.crypto}-${symbol.fiat}-container`}
-      class='px-l-1 col-span-full grid w-full grid-cols-2 gap-x-0 lg:gap-x-4 relative'
+      class='grid px-l-1 col-span-full h-full w-full grid-cols-2 gap-x-0 lg:gap-x-4 relative'
       data-asset={symbol.crypto}
       data-fiat={symbol.fiat}
     >

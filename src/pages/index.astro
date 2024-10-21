@@ -26,12 +26,3 @@ try {
   <!-- Websocket setup -->
   <CrossExchangeMonitor pairs={availablePairs} />
 </PriceMonitoringLayout>
-
-<script>
-  document.body.addEventListener('htmx:wsAfterMessage', ((
-    event: CustomEvent
-  ) => {
-    // const appLoadingElem = document.querySelector('#app-loading-indicator') as HTMLElement
-    // appLoadingElem.style.display = 'none'
-  }) as EventListener);
-</script>

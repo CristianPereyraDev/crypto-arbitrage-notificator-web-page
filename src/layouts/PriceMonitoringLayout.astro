@@ -7,7 +7,7 @@ import '@fontsource-variable/inter';
 import { Icon } from 'astro-icon/components';
 
 import Footer from '../components/footer.astro';
-import CurrencyRates from '../components/preact/CurrencyRates';
+import CurrencyRates from '../components/react/CurrencyRates';
 
 const { generator, site } = Astro;
 const image = new URL('prices_page.png', site);
@@ -53,10 +53,14 @@ try {
 
     <script
       defer
-      src='https://unpkg.com/htmx.org@1.9.6'
-      integrity='sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni'
+      src='https://unpkg.com/htmx.org@2.0.3'
+      integrity='sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq'
       crossorigin='anonymous'></script>
-    <script defer src='https://unpkg.com/htmx.org/dist/ext/ws.js'></script>
+    <script defer src='https://unpkg.com/htmx-ext-ws@2.0.1/ws.js'></script>
+    <script
+      defer
+      src='https://unpkg.com/htmx-ext-class-tools@2.0.1/class-tools.js'
+    ></script>
 
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
     <script src='/src/pwa/pwa.ts'></script>
@@ -76,7 +80,7 @@ try {
             size={50}
             class='hidden text-[--color-primary] lg:block'
           />
-          <CurrencyRates client:visible />
+          <CurrencyRates client:only='react' />
         </div>
         <button
           class='flex w-full items-center justify-center bg-onSurface md:hidden'
@@ -89,7 +93,7 @@ try {
       <main class='h-full md:py-2 lg:px-2'>
         <slot />
       </main>
-      <footer class='border-t border-default px-2 py-2'>
+      <footer class='px-2 py-2 bg-surface'>
         <Footer
           navLinks={[
             {
