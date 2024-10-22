@@ -36,7 +36,7 @@ export default function CurrencyRates() {
   }, []);
 
   return (
-    <div className='flex flex-wrap items-center justify-center gap-1 md:gap-4'>
+    <div className='flex flex-wrap h-full items-center justify-center gap-1 md:gap-4'>
       {loading ? (
         <CgSpinner className='animate-spin-slow text-2xl text-primary' />
       ) : (

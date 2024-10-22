@@ -72,10 +72,10 @@ try {
       ws-connect={`${cryptoArbitrageWebsocketURL}/websocket/web?at=${token}`}
     >
       <header
-        class='grid w-full auto-rows-min justify-items-center min-h-40 lg:min-h-20'
+        class='grid w-full auto-rows-min justify-items-center md:min-h-[168px] lg:min-h-[84px]'
       >
         <div
-          class='header-content flex h-0 items-center justify-between transition-all md:h-full md:px-2 md:py-2'
+          class='header-content flex h-full items-center justify-center transition-all md:h-full md:px-2 md:py-2'
         >
           <CurrencyRates client:only='react' />
         </div>
