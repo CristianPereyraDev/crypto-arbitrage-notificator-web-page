@@ -28,7 +28,7 @@ export default function CurrencyRates() {
 
     const timerRef = setInterval(() => {
       getRates();
-    }, 1000 * 10);
+    }, 1000 * 60);
 
     return () => {
       if (timerRef) clearInterval(timerRef);
@@ -36,11 +36,11 @@ export default function CurrencyRates() {
   }, []);
 
   return (
-    <div className='flex flex-wrap h-full items-center justify-center gap-1 md:gap-4'>
+    <div className='flex flex-wrap h-full items-center justify-center gap-1 md:gap-2'>
       {loading ? (
         <CgSpinner className='animate-spin-slow text-2xl text-primary' />
       ) : (
-        <MdCurrencyExchange className='text-2xl text-primary' />
+        <MdCurrencyExchange className='text-2xl text-primary hidden md:block' />
       )}
       {rates ? (
         rates.map((rate) => (

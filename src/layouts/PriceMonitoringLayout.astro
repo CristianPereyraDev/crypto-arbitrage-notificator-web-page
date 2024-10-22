@@ -70,19 +70,21 @@ try {
       id='price-monitoring-app'
       hx-ext='ws'
       ws-connect={`${cryptoArbitrageWebsocketURL}/websocket/web?at=${token}`}
+      class='grid-rows-layout min-h-screen md:h-screen'
     >
       <header
-        class='grid w-full auto-rows-min justify-items-center md:min-h-[168px] lg:min-h-[84px]'
+        class='w-full grid auto-rows-min justify-items-center md:h-40 lg:h-20'
       >
         <div
-          class='header-content flex h-full items-center justify-center transition-all md:h-full md:px-2 md:py-2'
+          class='header-content flex items-center justify-center transition-all h-0 md:h-full md:px-2 md:py-1'
         >
           <CurrencyRates client:only='react' />
         </div>
         <button
           class='flex w-full items-center justify-center bg-onSurface md:hidden'
         >
-          <span class='text-[--color-primary] text-xs'>Dollar</span>
+          <span class='flex text-xs'>USD</span>
+          <Icon class='text-[--color-primary]' name='mdi:currency-usd' />
           <Icon class='text-offset' name='mdi:chevron-down' />
           <Icon class='text-offset' name='mdi:chevron-up' />
         </button>

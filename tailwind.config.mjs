@@ -29,6 +29,9 @@ export default withMT({
 			},
 			animation: {
 				'spin-slow': 'spin 2s linear infinite',
+			},
+			gridTemplateRows: {
+				'layout': 'auto 1fr auto'
 			}
 		}
 	},

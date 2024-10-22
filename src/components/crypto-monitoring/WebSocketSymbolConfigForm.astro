@@ -41,13 +41,16 @@ const { symbol, defaultVolume = 1 } = Astro.props;
   hx-swap='innerHTML settle:1s'
   hx-vals={`{"crypto": { "asset": "${symbol.crypto}", "fiat": "${symbol.fiat}" }}`}
 >
-  <div class='flex flex-row items-center gap-3'>
+  <div class='flex flex-row items-center justify-evenly gap-3'>
     <label class='on-change-input-container flex gap-1 font-semibold'>
-      <span class='justify-self-center text-xs'>Incluir comisiones:</span>
+      <span class='justify-self-center text-xs leading-3'
+        >Incluir comisiones:</span
+      >
       <input
         id=`input-include-fees-${symbol.crypto}-${symbol.fiat}`
         name='includeFees'
         type='checkbox'
+        checked
       />
     </label>
     <label class='items-center font-semibold'>
