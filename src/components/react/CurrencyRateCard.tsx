@@ -6,7 +6,7 @@ type CurrencyRateCardProps = {
 
 export default function CurrencyRateCard({ rate }: CurrencyRateCardProps) {
   return (
-    <div className='grid min-w-0 grid-cols-2 justify-items-center gap-x-2 rounded bg-surface p-2 shadow-md text-xs'>
+    <div className='grid min-w-0 grid-cols-2 justify-items-center gap-x-2 rounded bg-surface px-2 py-1 shadow-md text-xs'>
       <span className='col-span-full min-w-0 font-semibold text-primary'>
         {rate.exchangeName}
       </span>

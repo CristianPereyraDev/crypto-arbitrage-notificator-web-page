@@ -71,15 +71,12 @@ try {
       hx-ext='ws'
       ws-connect={`${cryptoArbitrageWebsocketURL}/websocket/web?at=${token}`}
     >
-      <header class='grid w-full auto-rows-min justify-items-center'>
+      <header
+        class='grid w-full auto-rows-min justify-items-center min-h-40 lg:min-h-20'
+      >
         <div
-          class='header-content flex h-0 items-center justify-center transition-all md:h-full md:px-2 md:py-2'
+          class='header-content flex h-0 items-center justify-between transition-all md:h-full md:px-2 md:py-2'
         >
-          <Icon
-            name='mdi:currency-usd'
-            size={50}
-            class='hidden text-[--color-primary] lg:block'
-          />
           <CurrencyRates client:only='react' />
         </div>
         <button
